@@ -1,0 +1,110 @@
+{
+    "users": [
+      {
+        "user_id": 1,
+        "username": "john_doe",
+        "email": "john@example.com",
+        "phone": "1234567890",
+        "password_hash": "hashed_password_1",
+        "role": "jobseeker",
+        "is_verified": true,
+        "created_at": "2024-11-05T08:00:00Z"
+      },
+      {
+        "user_id": 2,
+        "username": "jane_smith",
+        "email": "jane@example.com",
+        "phone": "0987654321",
+        "password_hash": "hashed_password_2",
+        "role": "employer",
+        "is_verified": true,
+        "created_at": "2024-11-05T08:05:00Z"
+      },
+      {
+        "user_id": 3,
+        "username": "admin_user",
+        "email": "admin@example.com",
+        "phone": "1112223333",
+        "password_hash": "hashed_password_3",
+        "role": "admin",
+        "is_verified": true,
+        "created_at": "2024-11-05T08:10:00Z"
+      }
+    ],
+    "jobseeker_profiles": [
+      {
+        "profile_id": 1,
+        "user_id": 1,
+        "username": "john_doe",
+        "profile_pic": "https://example.com/profile_pic/john.jpg",
+        "bio": "Experienced software engineer",
+        "job_description": "Looking for a full-stack role",
+        "availability": true,
+        "job_category": "Software Development",
+        "salary_expectation": 70000,
+        "resume": "https://example.com/resume/john.pdf",
+        "profile_verified": true,
+        "updated_at": "2024-11-05T09:00:00Z"
+      }
+    ],
+    "employer_profiles": [
+      {
+        "employer_id": 1,
+        "user_id": 2,
+        "company_name": "Tech Solutions Ltd",
+        "company_email": "hr@techsolutions.com",
+        "profile_pic": "https://example.com/company/techsolutions.jpg",
+        "what_were_looking_for": "We are looking for skilled developers and analysts",
+        "verified": true,
+        "created_at": "2024-11-05T09:30:00Z"
+      }
+    ],
+    "notifications": [
+      {
+        "notification_id": 1,
+        "user_id": 1,
+        "message": "Your profile has been verified",
+        "notification_type": "profile_update",
+        "is_read": false,
+        "created_at": "2024-11-05T10:00:00Z"
+      }
+    ],
+    "messages": [
+      {
+        "message_id": 1,
+        "sender_id": 1,
+        "receiver_id": 2,
+        "content": "Hello, I’m interested in your profile!",
+        "sent_at": "2024-11-05T11:00:00Z"
+      }
+    ],
+    "payments": [
+      {
+        "payment_id": 1,
+        "user_id": 2,
+        "amount": 100.00,
+        "payment_status": "completed",
+        "payment_date": "2024-11-05T12:00:00Z",
+        "reference_code": "REF123456",
+        "phone_number": "0987654321"
+      }
+    ],
+    "admin_actions": [
+      {
+        "audit_id": 1,
+        "admin_id": 3,
+        "action": "Verified user profile",
+        "target_user_id": 1,
+        "action_date": "2024-11-05T13:00:00Z"
+      }
+    ],
+    "connections": [
+      {
+        "connection_id": 1,
+        "employer_id": 1,
+        "jobseeker_id": 1,
+        "connection_date": "2024-11-05T14:00:00Z"
+      }
+    ]
+  }
+  
