@@ -1,18 +1,17 @@
+// src/App.jsx
 import React from 'react';
-import MessagePage from "./components/MessagePage";
-import MessageList from "./components/MessageList";
-import "./styles/MessageStyles.css";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import EmployerLandingPage from './pages/EmployerLandingPage';
 
 function App() {
-    const senderId = 1;
-    const jobseekerId = 2;
-
-    return (
-        <div className="app-container">
-            <MessagePage senderId={senderId} jobseekerId={jobseekerId} />
-            <MessageList senderId={senderId} jobseekerId={jobseekerId}/>
-        </div>
-    );
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<EmployerLandingPage />} />
+        {/* Add other routes as needed */}
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
