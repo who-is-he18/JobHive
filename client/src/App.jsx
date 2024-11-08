@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<EmployerLandingPage />} />
+        <Route path="/ELandingPage" element={<EmployerLandingPage />} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>
