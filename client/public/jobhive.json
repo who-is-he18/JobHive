@@ -148,11 +148,14 @@
       "sent_at": "2024-11-05T11:00:00Z"
     }
   ],
-  "payments": [
+ "payments": [
     {
       "payment_id": 1,
       "user_id": 2,
       "amount": 100.00,
+      "currency": "KES",
+      "payment_method": "M-Pesa",
+      "service_description": "Premium membership access",
       "payment_status": "completed",
       "payment_date": "2024-11-05T12:00:00Z",
       "reference_code": "REF123456",
