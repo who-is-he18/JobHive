@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import './index.css';
+import './signin_up.css';
 
 const SignIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
