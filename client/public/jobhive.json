@@ -1,0 +1,182 @@
+{
+  "users": [
+    {
+      "user_id": 1,
+      "username": "John Doe",
+      "email": "john@example.com",
+      "phone": "1234567890",
+      "password_hash": "hashed_password_1",
+      "role": "jobseeker",
+      "is_verified": true,
+      "created_at": "2024-11-05T08:00:00Z"
+    },
+    {
+      "user_id": 2,
+      "username": "Jane Smith",
+      "email": "jane@example.com",
+      "phone": "0987654321",
+      "password_hash": "hashed_password_2",
+      "role": "employer",
+      "is_verified": true,
+      "created_at": "2024-11-05T08:05:00Z"
+    },
+    {
+      "user_id": 3,
+      "username": "Admin Joe",
+      "email": "admin@example.com",
+      "phone": "1112223333",
+      "password_hash": "hashed_password_3",
+      "role": "admin",
+      "is_verified": true,
+      "created_at": "2024-11-05T08:10:00Z"
+    }
+  ],
+  "jobseeker_profiles": [
+    {
+      "profile_id": 1,
+      "user_id": 1,
+      "username": "John Doe",
+      "profile_pic": "https://images.unsplash.com/photo-1669475535978-7479ef74e14f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHByb2ZpbGUlMjBwaWN8ZW58MHx8MHx8fDA%3D",
+      "bio": "Experienced software engineer",
+      "job_description": "Looking for a full-stack role",
+      "availability": true,
+      "job_category": "Software Development",
+      "salary_expectation": 70000,
+      "resume": "https://example.com/resume/john.pdf",
+      "profile_verified": true,
+      "updated_at": "2024-11-05T09:00:00Z"
+    },
+    {
+      "profile_id": 2,
+      "user_id": 4,
+      "username": "Mary Jane ",
+      "profile_pic": "https://images.unsplash.com/photo-1536164261511-3a17e671d380?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI2fHx8ZW58MHx8fHx8",
+      "bio": "Senior UX/UI designer with a passion for user experience",
+      "job_description": "Seeking creative design opportunities",
+      "availability": true,
+      "job_category": "Design",
+      "salary_expectation": 75000,
+      "resume": "https://example.com/resume/mary.pdf",
+      "profile_verified": true,
+      "updated_at": "2024-11-05T09:10:00Z"
+    },
+    {
+      "profile_id": 3,
+      "user_id": 5,
+      "username": "Lucas Lee",
+      "profile_pic": "https://images.unsplash.com/photo-1715615685666-882710b534f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4fHx8ZW58MHx8fHx8",
+      "bio": "Full-stack developer experienced in building scalable web applications",
+      "job_description": "Looking for a challenging development role",
+      "availability": true,
+      "job_category": "Software Development",
+      "salary_expectation": 80000,
+      "resume": "https://example.com/resume/lucas.pdf",
+      "profile_verified": true,
+      "updated_at": "2024-11-05T09:20:00Z"
+    },
+    {
+      "profile_id": 4,
+      "user_id": 6,
+      "username": "Susan Fox",
+      "profile_pic": "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDczfHx8ZW58MHx8fHx8",
+      "bio": "Experienced digital marketer with expertise in SEO and SEM",
+      "job_description": "Seeking opportunities in marketing",
+      "availability": true,
+      "job_category": "Marketing",
+      "salary_expectation": 65000,
+      "resume": "https://example.com/resume/susan.pdf",
+      "profile_verified": true,
+      "updated_at": "2024-11-05T09:30:00Z"
+    },
+    {
+      "profile_id": 5,
+      "user_id": 7,
+      "username": "David Smith",
+      "profile_pic": "https://images.unsplash.com/photo-1695931854534-f22c02611ba1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDgyfHx8ZW58MHx8fHx8",
+      "bio": "Front-end developer with a focus on responsive design",
+      "job_description": "Looking for front-end development roles",
+      "availability": true,
+      "job_category": "Web Development",
+      "salary_expectation": 70000,
+      "resume": "https://example.com/resume/david.pdf",
+      "profile_verified": true,
+      "updated_at": "2024-11-05T09:40:00Z"
+    },
+    {
+      "profile_id": 6,
+      "user_id": 8,
+      "username": "Alice Williams",
+      "profile_pic": "https://images.unsplash.com/photo-1702482527875-e16d07f0d91b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDg5fHx8ZW58MHx8fHx8",
+      "bio": "Project manager with experience in leading cross-functional teams",
+      "job_description": "Seeking project management opportunities",
+      "availability": true,
+      "job_category": "Management",
+      "salary_expectation": 85000,
+      "resume": "https://example.com/resume/alice.pdf",
+      "profile_verified": true,
+      "updated_at": "2024-11-05T09:50:00Z"
+    }
+  ],
+  "employer_profiles": [
+    {
+      "employer_id": 1,
+      "user_id": 2,
+      "company_name": "Tech Solutions Ltd",
+      "company_email": "hr@techsolutions.com",
+      "profile_pic": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDk0fHx8ZW58MHx8fHx8",
+      "what_were_looking_for": "We are looking for skilled developers and analysts",
+      "verified": true,
+      "created_at": "2024-11-05T09:30:00Z"
+    }
+  ],
+  "notifications": [
+    {
+      "notification_id": 1,
+      "user_id": 1,
+      "message": "Your profile has been verified",
+      "notification_type": "profile_update",
+      "is_read": false,
+      "created_at": "2024-11-05T10:00:00Z"
+    }
+  ],
+  "messages": [
+    {
+      "message_id": 1,
+      "sender_id": 1,
+      "receiver_id": 2,
+      "content": "Hello, I’m interested in your profile!",
+      "sent_at": "2024-11-05T11:00:00Z"
+    }
+  ],
+ "payments": [
+    {
+      "payment_id": 1,
+      "user_id": 2,
+      "amount": 100.00,
+      "currency": "KES",
+      "payment_method": "M-Pesa",
+      "service_description": "Premium membership access",
+      "payment_status": "completed",
+      "payment_date": "2024-11-05T12:00:00Z",
+      "reference_code": "REF123456",
+      "phone_number": "0987654321"
+    }
+  ],
+  "admin_actions": [
+    {
+      "audit_id": 1,
+      "admin_id": 3,
+      "action": "Verified user profile",
+      "target_user_id": 1,
+      "action_date": "2024-11-05T13:00:00Z"
+    }
+  ],
+  "connections": [
+    {
+      "connection_id": 1,
+      "employer_id": 1,
+      "jobseeker_id": 1,
+      "connection_date": "2024-11-05T14:00:00Z"
+    }
+  ]
+}
