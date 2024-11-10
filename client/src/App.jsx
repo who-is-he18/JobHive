@@ -1,17 +1,24 @@
-// src/App.jsx
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
+import Signup from './pages/SignUp'; 
+import SignIn from './pages/SignIn';
 import EmployerLandingPage from './pages/EmployerLandingPage';
-import PaymentPage from './pages/PaymentPage';
+import PaymentPage from './pages/PaymentPage';  
 
 function App() {
   return (
-    <Routes>
-      <Route path="/ELandingPage" element={<EmployerLandingPage />} />
+    <div>
+      <Routes>
+        <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/ELandingPage" element={<EmployerLandingPage />} />
       <Route path="/payment" element={<PaymentPage />} />
-      {/* Add other routes as needed */}
-    </Routes>
+      </Routes>
+    </div>
   );
+}
+
+function handleSignup(newUser) {
+  console.log('New user:', newUser);
 }
 
 export default App;
