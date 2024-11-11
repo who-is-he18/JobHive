@@ -6,7 +6,7 @@ const AdminPage = () => {
     return (
         <div className="admin-page">
         <header className="admin-header">
-            <span className="admin-name">ADMIN NAME</span>
+            <span className="admin-name">ADMIN</span>
             <FaSignOutAlt className="logout-icon" /> {/* Logout icon */}
         </header>
         
