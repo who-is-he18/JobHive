@@ -124,7 +124,6 @@ const Signup = ({ onSignup }) => {
         >
           <option value="">Select your role</option>
           <option value="Candidate">Candidate</option>
-          <option value="admin">Admin</option>
           <option value="employer">Employer</option>
         </select>
         {formik.touched.role && formik.errors.role && (
