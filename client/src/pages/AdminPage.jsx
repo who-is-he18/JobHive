@@ -8,7 +8,7 @@ const AdminPage = () => {
     const [pendingVerifications, setPendingVerifications] = useState(0);
 
 useEffect(() => {
-    fetch('/jobhive.json')
+    fetch('/jobhive.json') # THIS NEEDS TO BE CHANGED TO AN API LATER ON
         .then((response) => response.json())
         .then((jsonData) => {
             // Count employers
