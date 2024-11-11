@@ -1,4 +1,4 @@
-// src/components/JobseekerProfile/ViewJobseekerProfile.js
+// src/components/JobseekerProfile/ViewJobseekerProfile.jsx
 import React from 'react';
 
 const ViewJobseekerProfile = () => {

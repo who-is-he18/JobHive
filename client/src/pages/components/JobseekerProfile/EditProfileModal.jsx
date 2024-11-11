@@ -1,4 +1,4 @@
-// src/components/JobseekerProfile/EditProfileModal.js
+// src/components/JobseekerProfile/EditProfileModal.jsx
 import React, { useState } from 'react';
 
 const EditProfileModal = () => {

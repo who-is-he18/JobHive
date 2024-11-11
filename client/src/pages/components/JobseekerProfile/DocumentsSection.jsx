@@ -1,4 +1,4 @@
-// src/components/JobseekerProfile/DocumentsSection.js
+// src/components/JobseekerProfile/DocumentsSection.jsx
 import React from 'react';
 
 const DocumentsSection = () => {

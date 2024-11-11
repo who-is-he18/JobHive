@@ -1,6 +1,6 @@
 // src/components/JobseekerProfile/JobseekerProfile.js
 import React from 'react';
-import ViewJobseekerProfile from './ViewJobseekerProfile';
+import ViewJobseekerProfile from './ViewJobseekerProfile.jsx';
 import DocumentsSection from './DocumentsSection';
 import EditProfileModal from './EditProfileModal';
 
