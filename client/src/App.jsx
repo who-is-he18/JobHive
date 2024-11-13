@@ -5,7 +5,8 @@ import EmployerLandingPage from './pages/EmployerLandingPage';
 import PaymentPage from './pages/PaymentPage'; 
 import MessagePage from './pages/MessagePage' 
 import AdminPage from "./pages/AdminPage";
-
+import ViewJobseekerProfile from './pages/components/JobseekerProfile/ViewJobseekerProfile.jsx';
+import JobseekerProfile from './pages/components/JobseekerProfile/JobseekerProfile.jsx';
 function App() {
     return (
         <div>
@@ -16,7 +17,10 @@ function App() {
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/message" element={<MessagePage />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/jobseeker-profile" element={<JobseekerProfile />} />
+            <Route path="/view-jobseeker-profile" element={<ViewJobseekerProfile />} />
         </Routes>
+
         </div>
     );
 }
