@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
-import './signin_up.css';
+import './signin.css';
 
 const preSeedAdmin = () => {
   const admins = JSON.parse(localStorage.getItem('admins')) || [];
@@ -48,7 +48,7 @@ const SignIn = () => {
         console.log('Admin signed in:', values);
 
        
-        navigate('/admin-dashboard');
+        navigate('/admin');
       } else {
         
         alert('Invalid email or password');
@@ -64,7 +64,7 @@ const SignIn = () => {
         if (user.role === 'employer') {
           navigate('/ElandingPage'); 
         } else if (user.role === 'candidate') {
-          navigate('/jobseeker-dashboard'); 
+          navigate('/jobseeker-profile/:userId'); 
         } else {
           alert('Unknown role');
         }

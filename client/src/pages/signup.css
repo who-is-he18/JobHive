@@ -1,0 +1,100 @@
+/* signup.css */
+
+/* Container styling */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f7fa; /* Light background */
+  }
+  
+  /* Form styling */
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    padding: 25px;
+    background-color: white; /* Form background */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Slightly darker shadow */
+    border-radius: 8px;
+  }
+  
+  /* Input fields */
+  .signup-form input[type="text"],
+  .signup-form input[type="email"],
+  .signup-form input[type="tel"],
+  .signup-form input[type="password"],
+  .signup-form select {
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333; /* Dark text */
+  }
+  
+  /* Input error highlighting */
+  .input-error {
+    border-color: #ff4d4f; /* Red border for errors */
+  }
+  
+  /* Error message styling */
+  .signup-error {
+    font-size: 0.875rem;
+    color: #ff4d4f; /* Red color for error messages */
+    margin-top: -8px;
+    margin-bottom: 8px;
+  }
+  
+  /* Submit button styling */
+  .signup-form button[type="submit"] {
+    background-color: #1E90FF; /* Deep blue color */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .signup-form button[type="submit"]:hover {
+    background-color: #0077cc; /* Darker blue on hover */
+  }
+  
+  .signup-form button[type="submit"]:disabled {
+    background-color: #d3d3d3; /* Gray for disabled state */
+    cursor: not-allowed;
+  }
+  
+  /* Login link section */
+  .signup-login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.875rem;
+    color: #333;
+  }
+  
+  .signup-login-link a {
+    color: #1E90FF; /* Blue color for links */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .signup-login-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Adjusting layout for the login text to align under the form */
+  .signup-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .signup-form {
+    margin-bottom: 10px; /* Space between form and login link */
+  }
+  

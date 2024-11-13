@@ -1,62 +1,129 @@
+/* EmployerProfilePage.css */
+
 .employer-profile {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-card {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
-}
-
-.profile-card {
-    width: 400px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-}
-
-.profile-picture img {
-    width: 80px;
-    height: 80px;
+  }
+  
+  .profile-picture img {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
     margin-bottom: 20px;
-}
-
-.profile-info {
-    background-color: #f0f0f0;
-    padding: 10px;
+  }
+  
+  .profile-info {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info p,
+  .profile-info label {
+    font-size: 1rem;
+    color: #333;
+    margin: 8px 0;
+  }
+  
+  .profile-info input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.description-section {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.description-section h4 {
-    margin-bottom: 5px;
-}
-
-.action-buttons {
+  }
+  
+  .description-section {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .description-section h4 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .description-section p,
+  .description-section textarea {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .description-section textarea {
+    width: 100%;
+    height: 80px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+  }
+  
+  .action-buttons {
     display: flex;
-    justify-content: space-between;
-}
-
-.edit-button, .delete-button {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .action-buttons button {
     padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
+    font-size: 1rem;
+    font-weight: bold;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-}
-
-.edit-button {
+    transition: background-color 0.3s;
+  }
+  
+  .edit-button {
     background-color: #007bff;
     color: #fff;
-}
-
-.delete-button {
+  }
+  
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .save-button {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .save-button:hover {
+    background-color: #218838;
+  }
+  
+  .cancel-button {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .cancel-button:hover {
+    background-color: #5a6268;
+  }
+  
+  .delete-button {
     background-color: #dc3545;
     color: #fff;
-}
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+  

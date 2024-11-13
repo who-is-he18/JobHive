@@ -12,14 +12,11 @@ function JobseekersProfile() {
     useEffect(() => {
         async function fetchData() {
             try {
-                // Simulate fetching from the provided JSON (replace this with actual API call if needed)
                 const response = await fetch('/jobhive.json');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-
-                // Find the profile matching the userId
                 const userProfile = data.jobseeker_profiles.find(profile => profile.user_id === parseInt(userId));
                 const userMessages = data.messages.filter(message => message.sender_id === parseInt(userId));
 

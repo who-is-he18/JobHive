@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 const HomePage = () => {
-  // Replace this with your image URL
   const heroImageUrl = "https://img.freepik.com/free-vector/search-concept-illustration_114360-95.jpg?t=st=1731419806~exp=1731423406~hmac=d56d3d3d90d98a018b7bc692a994f0f2abdc47cbc6dddb73e51759c074cdb97f&w=740";
 
   return (
@@ -32,7 +31,7 @@ const HomePage = () => {
             that you don’t have to.
           </p>
           <div className="hero-buttons">
-            <Link to="/get-started" className="get-started-button">Get started</Link>
+            <Link to="/signup" className="get-started-button">Get started</Link>
             <Link to="/explore-jobs" className="explore-jobs-button">Explore jobs</Link>
           </div>
         </div>

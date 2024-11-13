@@ -1,81 +1,135 @@
+/* AdminPage.css */
+
 .admin-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
-    color: #333;
-    padding: 1.5rem;
-    max-width: 600px;
-    margin: 0 auto;
 }
 
 .admin-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
-    gap: 0.5rem;
+    width: 100%;
+    max-width: 800px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .admin-name {
-    font-weight: 500;
-    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .logout-icon {
-    font-size: 1.2rem;
+    font-size: 20px;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.logout-icon:hover {
+    color: #ff4d4d;
 }
 
 .stats-section {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
 }
 
 .user-stats, .pending-verifications {
-    border: 1px solid #e0e0e0;
-    border-radius: 15px;
-    padding: 1.5rem;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    position: relative;  /* Added for absolute positioning of total */
+    flex: 1;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-stats h3, .pending-verifications h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #000;
-    margin-bottom: 1rem;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
 }
 
-.stats-content {
-    margin-bottom: 1.5rem;  /* Add space for the total at bottom */
-}
-
-.total-label {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    font-weight: 500;
+.user-stats p, .pending-verifications p {
+    font-size: 16px;
+    color: #555;
 }
 
 .button-group {
     display: flex;
-    gap: 1rem;
-    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .view-employers-btn, .view-candidates-btn {
-    padding: 0.75rem 1.5rem;
-    background-color: #1E90FF;
-    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .view-employers-btn:hover, .view-candidates-btn:hover {
-    background-color: #1873CC;
+    background-color: #0056b3;
+}
+
+.employers-list, .jobseekers-list {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.employers-list h3, .jobseekers-list h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.employer-card, .jobseeker-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.employer-card:last-child, .jobseeker-card:last-child {
+    border-bottom: none;
+}
+
+.employer-card img, .jobseeker-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.employer-card p, .jobseeker-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.employer-card strong, .jobseeker-card strong {
+    font-weight: bold;
 }

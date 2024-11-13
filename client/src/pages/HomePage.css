@@ -1,116 +1,152 @@
-/* General Page Styling */
-.home-page {
+/* General body styling */
+body {
     font-family: Arial, sans-serif;
-    color: #333;
-}
-
-/* Navbar Styling */
-.navbar {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  /* Home Page container */
+  .home-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Navbar Styling */
+  .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 3rem;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
-}
-
-.logo h1 {
-    color: #3B82F6;
-    font-weight: bold;
-    font-size: 1.5rem;
-}
-
-.nav-links {
+    padding: 20px 40px;
+    background-color: #f9fafc;
+    color: rgb(15, 68, 241);
+  }
+  
+  .navbar .logo h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .navbar .nav-links {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
-}
-
-.nav-links a {
+    gap: 20px;
+  }
+  
+  .navbar .nav-links li {
+    font-size: 18px;
+  }
+  
+  .navbar .nav-links a {
+    color: rgb(19, 16, 16);
     text-decoration: none;
-    color: #333;
-    font-size: 1.1rem;
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.signin-button,
-.signup-button {
-    text-decoration: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
-.signin-button {
-    color: #3B82F6;
-    border: 1px solid #3B82F6;
-    background-color: transparent;
-}
-
-.signup-button {
+    transition: color 0.3s ease;
+  }
+  
+  .navbar .nav-links a:hover {
+    color: #041beb;
+  }
+  
+  .navbar .auth-buttons a {
     color: white;
-    background-color: #3B82F6;
-    border: none;
-}
-
-/* Hero Section Styling */
-.hero {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #0c3ee4;
+    margin-left: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .navbar .auth-buttons a:hover {
+    background-color: #0e0a04;
+    box-shadow: 0 0 10px 4px rgba(12, 62, 228, 0.8); /* Edge lighting effect */
+  }
+  
+  /* Hero Section */
+  .hero {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 3rem 4rem;
-    gap: 3rem;
-}
-
-.hero-content {
-    max-width: 450px;
-}
-
-.hero-content h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1.2rem;
-}
-
-.hero-content p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    color: #666;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.get-started-button,
-.explore-jobs-button {
-    text-decoration: none;
-    padding: 0.8rem 1.6rem;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.get-started-button {
-    color: white;
-    background-color: #3B82F6;
-    border: none;
-}
-
-.explore-jobs-button {
+    padding: 80px 40px;
+    background-color: #fff;
+  }
+  
+  .hero-content {
+    flex: 1;
+    max-width: 600px;
+  }
+  
+  .hero-content h2 {
+    font-size: 36px;
     color: #333;
-    background-color: white;
-    border: 1px solid #ddd;
-}
-
-.hero-image img {
-    width: 600px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .get-started-button, .explore-jobs-button {
+    padding: 15px 30px;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: #0066cc;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .get-started-button:hover, .explore-jobs-button:hover {
+    background-color: #00060c;
+    box-shadow: 0 0 10px 4px rgba(0, 102, 204, 0.8); /* Edge lighting effect */
+  }
+  
+  .hero-image img {
+    max-width: 500px;
+    width: 100%;
     height: auto;
     border-radius: 10px;
-    transform: translateX(20px); 
-}
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar .nav-links {
+      flex-direction: column;
+      margin-top: 10px;
+    }
+  
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 60px 20px;
+    }
+  
+    .hero-content {
+      max-width: 100%;
+    }
+  
+    .hero-buttons {
+      flex-direction: column;
+    }
+  
+    .hero-image img {
+      max-width: 100%;
+    }
+  }
+  

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './EmployerLandingPage.css';
 
 const EmployerLandingPage = () => {
@@ -36,11 +37,13 @@ const EmployerLandingPage = () => {
         {employerProfiles.length > 0 ? (
           employerProfiles.map((employer) => (
             <div key={employer.employer_id} className="employer-info">
-              <img 
-                src={employer.profile_pic || "default_employer_image_url"} 
-                alt="Employer Profile" 
-                className="profile-photo"
-              />
+              <Link to={`/employer/${employer.employer_id}`}>
+                <img 
+                  src={employer.profile_pic || "default_employer_image_url"} 
+                  alt="Employer Profile" 
+                  className="profile-photo"
+                />
+              </Link>
               <h2>{employer.company_name}</h2>
               <p>{employer.what_were_looking_for}</p>
             </div>
@@ -75,7 +78,9 @@ const EmployerLandingPage = () => {
                   <span className="candidate-name">{candidate.username}</span>
                   <span className="candidate-category">{candidate.job_category}</span>
                 </div>
-                <button className="view-profile-btn">View Profile</button>
+                <Link to={`/view-jobseeker-profile/${candidate.profile_id}`}>
+                  <button className="view-profile-btn">View Profile</button>
+                </Link>
               </li>
             ))
           ) : (

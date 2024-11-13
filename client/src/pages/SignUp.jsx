@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { useNavigate, Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import './signin_up.css';
+import './signup.css';
 
 const Signup = ({ onSignup }) => {
   const navigate = useNavigate();

@@ -11,7 +11,7 @@
       "created_at": "2024-11-05T08:00:00Z"
     },
     {
-      "user_id": 2,
+      "user_id": 9,
       "username": "Jane Smith",
       "email": "jane@example.com",
       "phone": "0987654321",
@@ -21,7 +21,7 @@
       "created_at": "2024-11-05T08:05:00Z"
     },
     {
-      "user_id": 3,
+      "user_id": 10,
       "username": "Admin Joe",
       "email": "admin@example.com",
       "phone": "1112223333",
@@ -48,7 +48,7 @@
     },
     {
       "profile_id": 2,
-      "user_id": 4,
+      "user_id": 2,
       "username": "Mary Jane ",
       "profile_pic": "https://images.unsplash.com/photo-1536164261511-3a17e671d380?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI2fHx8ZW58MHx8fHx8",
       "bio": "Senior UX/UI designer with a passion for user experience",
@@ -62,7 +62,7 @@
     },
     {
       "profile_id": 3,
-      "user_id": 5,
+      "user_id": 3,
       "username": "Lucas Lee",
       "profile_pic": "https://images.unsplash.com/photo-1715615685666-882710b534f9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM4fHx8ZW58MHx8fHx8",
       "bio": "Full-stack developer experienced in building scalable web applications",
@@ -76,7 +76,7 @@
     },
     {
       "profile_id": 4,
-      "user_id": 6,
+      "user_id": 4,
       "username": "Susan Fox",
       "profile_pic": "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDczfHx8ZW58MHx8fHx8",
       "bio": "Experienced digital marketer with expertise in SEO and SEM",
@@ -90,7 +90,7 @@
     },
     {
       "profile_id": 5,
-      "user_id": 7,
+      "user_id": 5,
       "username": "David Smith",
       "profile_pic": "https://images.unsplash.com/photo-1695931854534-f22c02611ba1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDgyfHx8ZW58MHx8fHx8",
       "bio": "Front-end developer with a focus on responsive design",
@@ -104,7 +104,7 @@
     },
     {
       "profile_id": 6,
-      "user_id": 8,
+      "user_id": 6,
       "username": "Alice Williams",
       "profile_pic": "https://images.unsplash.com/photo-1702482527875-e16d07f0d91b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDg5fHx8ZW58MHx8fHx8",
       "bio": "Project manager with experience in leading cross-functional teams",
@@ -120,7 +120,7 @@
   "employer_profiles": [
     {
       "employer_id": 1,
-      "user_id": 2,
+      "user_id": 8,
       "company_name": "Tech Solutions Ltd",
       "company_email": "hr@techsolutions.com",
       "profile_pic": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDk0fHx8ZW58MHx8fHx8",
@@ -144,7 +144,7 @@
       "message_id": 1,
       "sender_id": 1,
       "receiver_id": 2,
-      "content": "Hello, I’m interested in your profile!",
+      "content": "Hello, I'm interested in your profile!",
       "sent_at": "2024-11-05T11:00:00Z"
     }
   ],
