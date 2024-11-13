@@ -14,7 +14,7 @@ const AdminPage = () => {
     });
 
 useEffect(() => {
-    fetch('/jobhive.json') # THIS NEEDS TO BE CHANGED TO AN API LATER ON
+    fetch('/jobhive.json') 
         .then((response) => response.json())
         .then((data) => {
             const employerProfiles = data.employer_profiles || [];
