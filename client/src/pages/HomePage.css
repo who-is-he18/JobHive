@@ -1,0 +1,116 @@
+/* General Page Styling */
+.home-page {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo h1 {
+    color: #3B82F6;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.signin-button,
+.signup-button {
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.signin-button {
+    color: #3B82F6;
+    border: 1px solid #3B82F6;
+    background-color: transparent;
+}
+
+.signup-button {
+    color: white;
+    background-color: #3B82F6;
+    border: none;
+}
+
+/* Hero Section Styling */
+.hero {
+    display: flex;
+    align-items: center;
+    padding: 3rem 4rem;
+    gap: 3rem;
+}
+
+.hero-content {
+    max-width: 450px;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.2rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.get-started-button,
+.explore-jobs-button {
+    text-decoration: none;
+    padding: 0.8rem 1.6rem;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.get-started-button {
+    color: white;
+    background-color: #3B82F6;
+    border: none;
+}
+
+.explore-jobs-button {
+    color: #333;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.hero-image img {
+    width: 600px;
+    height: auto;
+    border-radius: 10px;
+    transform: translateX(20px); 
+}
