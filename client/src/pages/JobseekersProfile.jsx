@@ -47,6 +47,7 @@ function JobseekersProfile() {
             <p><strong>Bio:</strong> {profile.bio}</p>
             <p><strong>Job Category:</strong> {profile.job_category}</p>
             <p><strong>Salary Expectation:</strong> ${profile.salary_expectation}</p>
+            <p><strong>Job Description:</strong> {profile.job_description}</p>
             <p><strong>Availability:</strong> {profile.availability ? 'Available' : 'Not Available'}</p>
             <a href={profile.resume} target="_blank" rel="noopener noreferrer">View Resume</a>
 
