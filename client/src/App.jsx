@@ -10,6 +10,8 @@ import ViewJobseekerProfile from './pages/ViewJobseekerProfile';
 import JobseekersProfile from './pages/JobseekersProfile';
 import HomePage from './pages/HomePage';
 import EmployerProfilePage from './pages/EmployerProfilePage';
+import ResumeViewer from './pages/ResumeViewer';
+
 
 function App() {
     return (
@@ -25,6 +27,8 @@ function App() {
                 <Route path="/jobseeker-profile/:userId" element={<JobseekersProfile />} />
                 <Route path="/view-jobseeker-profile/:profileId" element={<ViewJobseekerProfile />} />
                 <Route path="/employer/:employerId" element={<EmployerProfilePage />} />
+                <Route path="/resume-view/:userId" element={<ResumeViewer />} />
+
             </Routes>
         </div>
     );

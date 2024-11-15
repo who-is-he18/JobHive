@@ -1,85 +1,99 @@
 /* ViewJobseekersProfile.css */
 
 .profile-container {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-header-background {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.profile-header-overlay {
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay for contrast */
+  color: white;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.profile-header-overlay h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.profile-info {
+  padding: 20px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.profile-info p {
+  margin: 5px 0;
+}
+
+.profile-details {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.profile-details div {
+  margin-bottom: 15px;
+}
+
+.view-resume-button {
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-resume-button:hover {
+  background-color: #0056b3;
+}
+
+.message-button {
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* Full width for better usability */
+}
+
+.message-button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 600px) {
+  .profile-header-background {
+      height: 200px; /* Reduced height for mobile screens */
   }
-  
-  .profile-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+
+  .profile-header-overlay h1 {
+      font-size: 1.5rem;
   }
-  
-  .profile-pic {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
-    border: 2px solid #ddd;
-  }
-  
-  .profile-info p {
-    font-size: 1rem;
-    color: #333;
-    margin: 8px 0;
-  }
-  
-  .profile-info strong {
-    color: #555;
-  }
-  
-  .profile-details {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #eee;
-  }
-  
-  .profile-details div {
-    margin-bottom: 10px;
-  }
-  
-  .availability,
-  .salary-expectations,
-  .documents {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .documents a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .documents a:hover {
-    text-decoration: underline;
-  }
-  
-  .message-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-top: 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .message-button:hover {
-    background-color: #218838;
-  }
-  
+}

@@ -21,16 +21,25 @@ const ViewJobseekersProfile = () => {
     navigate(`/message/${profileId}`);
   };
 
+  const handleViewResume = () => {
+    navigate(`/resume-view/${profileId}`);
+  };
+
   return jobseekerProfile ? (
     <div className="profile-container">
-      <div className="profile-header">
-        <img src={jobseekerProfile.profile_pic} alt="Profile" className="profile-pic" />
-        <div className="profile-info">
-          <p><strong>Jobseeker's name:</strong> {jobseekerProfile.username}</p>
-          <p><strong>Phone Number:</strong> 123-456-7890</p>
-          <p><strong>Job Category:</strong> {jobseekerProfile.job_category}</p>
-          <p><strong>Email:</strong> {jobseekerProfile.email}</p>
+      <div
+        className="profile-header-background"
+        style={{ backgroundImage: `url(${jobseekerProfile.profile_pic})` }}
+      >
+        <div className="profile-header-overlay">
+          <h1>{jobseekerProfile.username}</h1>
         </div>
+      </div>
+      <div className="profile-info">
+        <p><strong>Jobseeker's name:</strong> {jobseekerProfile.username}</p>
+        <p><strong>Phone Number:</strong> 123-456-7890</p>
+        <p><strong>Job Category:</strong> {jobseekerProfile.job_category}</p>
+        <p><strong>Email:</strong> {jobseekerProfile.email}</p>
       </div>
       <div className="profile-details">
         <div className="availability">
@@ -41,7 +50,7 @@ const ViewJobseekersProfile = () => {
         </div>
         <div className="documents">
           <strong>Documents:</strong>
-          <a href={jobseekerProfile.resume} target="_blank" rel="noopener noreferrer">View Resume</a>
+          <button onClick={handleViewResume} className="view-resume-button">View Resume</button>
         </div>
       </div>
       <button className="message-button" onClick={handleMessageClick}>Message</button>

@@ -25,7 +25,6 @@ const SignIn = () => {
     preSeedAdmin();
   }, []);
 
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -39,33 +38,35 @@ const SignIn = () => {
         .required('Password is required'),
     }),
     onSubmit: (values) => {
-      // Admin sign-in
+      //Admin sign-in
       const admins = JSON.parse(localStorage.getItem('admins')) || [];
       const admin = admins.find(admin => admin.email === values.email && admin.password === values.password);
    
       if (admin) {
-         setIsLoggedIn(true);
-         console.log('Admin signed in:', values);
-         return navigate('/admin');
-      }
-   
-      // Employer and jobseeker sign-in
+        setIsLoggedIn(true);
+        console.log('Admin signed in:', values);
+
+       
+        navigate('/admin');
+        return;
+      } 
+       // employer and jobseeker  sign up
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find(u => u.email === values.email && u.password === values.password);
    
       if (user) {
-         setIsLoggedIn(true);
-         console.log('Signed in:', values);
-   
-         if (user.role === 'Edmployer') {
-            return navigate('/ElandingPage');
-         } else if (user.role === 'Candidate') {
-            return navigate(`/jobseeker-profile/${1}`);
-         } else {
-            alert('Unknown role');
-         }
+        setIsLoggedIn(true);
+        console.log('Signed in:', values);
+
+        if (user.role === 'employer') {
+          return navigate('/ElandingPage'); 
+        } else if (user.role === 'candidate') {
+          return navigate(`/jobseeker-profile/${1}`); 
+        } else {
+          alert('Unknown role');
+        }
       } else {
-         alert('Invalid email or password');
+        return alert('Invalid email or password');
       }
    }
   });

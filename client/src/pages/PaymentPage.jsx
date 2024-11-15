@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PaymentPage.css';
 
 const PaymentPage = () => {
   const [plan, setPlan] = useState('yearly');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const navigate = useNavigate();
 
   const handlePlanChange = (e) => {
     setPlan(e.target.value);
@@ -17,6 +19,9 @@ const PaymentPage = () => {
     // Here, you can implement the payment logic or API integration
     console.log(`Plan: ${plan}, Phone Number: ${phoneNumber}`);
     alert(`Proceeding with ${plan === 'yearly' ? 'Yearly Plan' : 'Monthly Plan'} for phone: ${phoneNumber}`);
+    
+    // Navigate to /ELandingPage after payment logic
+    navigate('/Signin');
   };
 
   return (

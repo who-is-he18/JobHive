@@ -44,9 +44,13 @@ const Signup = ({ onSignup }) => {
 
         // Log successful submission
         console.log('Signup successful, redirecting...');
-        
-        // Redirect to sign-in page after successful signup
-        navigate('/signin');
+
+        // Redirect based on role
+        if (values.role === 'employer') {
+          navigate('/payment');  // Redirect employers to payment page
+        } else {
+          navigate('/signin');  // Jobseekers are redirected to sign-in page
+        }
       } catch (error) {
         console.error('Signup error:', error);
         alert('There was an error during signup. Please try again.');
@@ -56,9 +60,7 @@ const Signup = ({ onSignup }) => {
 
   return (
     <div className="signup-container">
-      
       <form onSubmit={formik.handleSubmit} className="signup-form">
-        
         <input
           type="text"
           id="name"
@@ -72,7 +74,6 @@ const Signup = ({ onSignup }) => {
           <div className="signup-error">{formik.errors.name}</div>
         )}
 
-        
         <input
           type="email"
           id="email"
@@ -86,7 +87,6 @@ const Signup = ({ onSignup }) => {
           <div className="signup-error">{formik.errors.email}</div>
         )}
 
-        
         <input
           type="tel"
           id="phone_number"
@@ -100,7 +100,6 @@ const Signup = ({ onSignup }) => {
           <div className="signup-error">{formik.errors.phone_number}</div>
         )}
 
-       
         <input
           type="password"
           id="password"
@@ -114,7 +113,6 @@ const Signup = ({ onSignup }) => {
           <div className="signup-error">{formik.errors.password}</div>
         )}
 
-        
         <select
           id="role"
           value={formik.values.role}
