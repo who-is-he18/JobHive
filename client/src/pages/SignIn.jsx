@@ -25,7 +25,6 @@ const SignIn = () => {
     preSeedAdmin();
   }, []);
 
-
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -39,21 +38,18 @@ const SignIn = () => {
         .required('Password is required'),
     }),
     onSubmit: (values) => {
-      // admin sign in
+      // Admin sign-in check
       const admins = JSON.parse(localStorage.getItem('admins')) || [];
       const admin = admins.find(admin => admin.email === values.email && admin.password === values.password);
 
       if (admin) {
         setIsLoggedIn(true);
         console.log('Admin signed in:', values);
-
-       
         navigate('/admin');
-      } else {
-        
-        alert('Invalid email or password');
+        return;  // Exit early after successful admin login
       }
-       // employer and jobseeker  sign up
+      
+      // Employer and Jobseeker sign-in check
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find(u => u.email === values.email && u.password === values.password);
 
@@ -63,12 +59,14 @@ const SignIn = () => {
 
         if (user.role === 'employer') {
           navigate('/ElandingPage'); 
-        } else if (user.role === 'candidate') {
-          navigate('/jobseeker-profile/:userId'); 
+        } else if (user.role === 'Candidate') {
+          navigate(`/jobseeker-profile/${1}`); 
         } else {
           alert('Unknown role');
         }
+        return; // Exit early after successful user login
       } else {
+        // Only show alert if both admin and user credentials fail
         alert('Invalid email or password');
       }
     },
