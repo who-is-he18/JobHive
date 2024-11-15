@@ -33,33 +33,24 @@ const ViewJobseekersProfile = () => {
       >
         <div className="profile-header-overlay">
           <h1>{jobseekerProfile.username}</h1>
-          <p><strong>Job Category:</strong> {jobseekerProfile.job_category}</p>
         </div>
       </div>
       <div className="profile-info">
-        <p><strong>Phone Number:</strong> {jobseekerProfile.phone}</p>
+        <p><strong>Jobseeker's name:</strong> {jobseekerProfile.username}</p>
+        <p><strong>Phone Number:</strong> 123-456-7890</p>
+        <p><strong>Job Category:</strong> {jobseekerProfile.job_category}</p>
         <p><strong>Email:</strong> {jobseekerProfile.email}</p>
-        <p><strong>LinkedIn:</strong> <a href={jobseekerProfile.linkedin} target="_blank" rel="noopener noreferrer">{jobseekerProfile.linkedin}</a></p>
-        <p><strong>Last Updated:</strong> {new Date(jobseekerProfile.updated_at).toLocaleDateString()}</p>
       </div>
       <div className="profile-details">
         <div className="availability">
           <strong>Availability:</strong> {jobseekerProfile.availability ? 'Available' : 'Not Available'}
         </div>
         <div className="salary-expectations">
-          <strong>Salary Expectations:</strong> ksh{jobseekerProfile.salary_expectation}
-        </div>
-        <div className="job-description">
-          <strong>Job Description:</strong>
-          <p>{jobseekerProfile.job_description}</p>
-        </div>
-        <div className="bio">
-          <strong>Bio:</strong>
-          <p>{jobseekerProfile.bio}</p>
+          <strong>Salary expectations:</strong> ksh{jobseekerProfile.salary_expectation}
         </div>
         <div className="documents">
           <strong>Documents:</strong>
-          <a href={jobseekerProfile.resume} target="_blank" rel="noopener noreferrer" className="view-resume-button">View Resume</a>
+          <button onClick={handleViewResume} className="view-resume-button">View Resume</button>
         </div>
       </div>
       <button className="message-button" onClick={handleMessageClick}>Message</button>
