@@ -10,6 +10,7 @@ from flask_bcrypt import Bcrypt
 from Models import db,User, JobseekerProfile, EmployerProfile, Payment, AdminAction, Notification
 
 from resources.user import UserResource,LoginResource
+from resources.jobseekerProfile import JobseekerProfileResource
 
 # Load environment variables from .env file
 load_dotenv()
@@ -41,8 +42,10 @@ db.init_app(app)
 def home():
     return 'Backend is up and running!'
 
-api.add_resource(UserResource,'/users','/users/<id>')
+api.add_resource(UserResource, '/users', '/users/<int:id>')
 api.add_resource(LoginResource,'/login')
+api.add_resource(JobseekerProfileResource, '/profile')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
