@@ -38,38 +38,37 @@ const SignIn = () => {
         .required('Password is required'),
     }),
     onSubmit: (values) => {
-      // Admin sign-in check
+      //Admin sign-in
       const admins = JSON.parse(localStorage.getItem('admins')) || [];
       const admin = admins.find(admin => admin.email === values.email && admin.password === values.password);
-
+   
       if (admin) {
         setIsLoggedIn(true);
         console.log('Admin signed in:', values);
+
+       
         navigate('/admin');
-        return;  // Exit early after successful admin login
-      }
-      
-      // Employer and Jobseeker sign-in check
+        return;
+      } 
+       // employer and jobseeker  sign up
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find(u => u.email === values.email && u.password === values.password);
-
+   
       if (user) {
         setIsLoggedIn(true);
         console.log('Signed in:', values);
 
         if (user.role === 'employer') {
-          navigate('/ElandingPage'); 
-        } else if (user.role === 'Candidate') {
-          navigate(`/jobseeker-profile/${1}`); 
+          return navigate('/ElandingPage'); 
+        } else if (user.role === 'candidate') {
+          return navigate(`/jobseeker-profile/${1}`); 
         } else {
           alert('Unknown role');
         }
-        return; // Exit early after successful user login
       } else {
-        // Only show alert if both admin and user credentials fail
-        alert('Invalid email or password');
+        return alert('Invalid email or password');
       }
-    },
+   }
   });
 
   return (
