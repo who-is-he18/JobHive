@@ -6,11 +6,10 @@ from flask_restful import Resource, Api
 from dotenv import load_dotenv
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
-
 from Models import db,User, JobseekerProfile, EmployerProfile, Payment, AdminAction, Notification
-
 from resources.user import UserResource,LoginResource
 from resources.jobseekerProfile import JobseekerProfileResource
+from resources.employerProfile import EmployerProfileResource       
 
 # Load environment variables from .env file
 load_dotenv()
@@ -44,7 +43,8 @@ def home():
 
 api.add_resource(UserResource, '/users', '/users/<int:id>')
 api.add_resource(LoginResource,'/login')
-api.add_resource(JobseekerProfileResource, '/profile')
+api.add_resource(JobseekerProfileResource, '/jobseekerprofile')
+api.add_resource(EmployerProfileResource, '/employerprofile')
 
 
 if __name__ == '__main__':
