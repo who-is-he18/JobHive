@@ -15,9 +15,9 @@ class EmployerProfile(db.Model,SerializerMixin):
     created_at = db.Column(db.TIMESTAMP, default=db.func.current_timestamp())  # Timestamp for profile creation
     
     #foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True, nullable=False)
 
-    serialize_rules = ('-user.employerprofiles')
+    serialize_rules = ('-user.employerprofiles',)
 
 
     def __repr__(self):

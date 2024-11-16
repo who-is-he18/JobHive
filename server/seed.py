@@ -1,6 +1,8 @@
 from app import app
+from flask_bcrypt import generate_password_hash,Bcrypt
 from Models import db, User, JobseekerProfile, EmployerProfile, Payment, Notification, AdminAction
 from datetime import datetime
+bcrypt = Bcrypt(app)
 
 def seed_database():
     """Seed the database with essential data"""
@@ -17,7 +19,7 @@ def seed_database():
                 username="jobhive_admin",
                 email="admin@jobhive.com",
                 phone="+254712345678",
-                password_hash="admin_password",  # Will be hashed properly
+                password_hash=bcrypt.generate_password_hash("admin_password").decode('utf-8'),
                 role="admin",
                 is_admin=True,
                 is_verified=True,
@@ -32,7 +34,7 @@ def seed_database():
                     username="tech_employer",
                     email="employer@tech.com",
                     phone="+254723456789",
-                    password_hash="employer_pass",
+                    password_hash=bcrypt.generate_password_hash("employer_pass").decode('utf-8'), 
                     role="employer",
                     is_verified=True,
                     created_at=datetime.now()
@@ -42,7 +44,7 @@ def seed_database():
                     username="john_dev",
                     email="john@email.com",
                     phone="+254734567890",
-                    password_hash="seeker_pass",
+                     password_hash=bcrypt.generate_password_hash("seeker_pass").decode('utf-8'), 
                     role="jobseeker",
                     is_verified=True,
                     created_at=datetime.now()
@@ -53,7 +55,7 @@ def seed_database():
 
             # Create profiles
             employer_profile = EmployerProfile(
-                user_id=users[0].user_id,
+                user_id=users[0].id,
                 company_name="Tech Company",
                 company_email="jobs@tech.com",
                 what_were_looking_for="Looking for Python developers",
@@ -61,7 +63,7 @@ def seed_database():
             )
             
             jobseeker_profile = JobseekerProfile(
-                user_id=users[1].user_id,
+                user_id=users[1].id,
                 username="john_dev",
                 bio="Python developer",
                 job_category="Software Development",
@@ -73,7 +75,7 @@ def seed_database():
             
             # Create a payment
             payment = Payment(
-                user_id=users[0].user_id,
+                user_id=users[0].id,
                 amount=1000.00,
                 payment_status="completed",
                 reference_code="PAY" + datetime.now().strftime("%Y%m%d%H%M%S"),
@@ -84,14 +86,14 @@ def seed_database():
             # Create notifications
             notifications = [
                 Notification(
-                    user_id=users[0].user_id,
+                    user_id=users[0].id,
                     message="Payment processed successfully",
                     notification_type="payment",
                     is_read=False,
                     created_at=datetime.now()
                 ),
                 Notification(
-                    user_id=users[1].user_id,
+                    user_id=users[1].id,
                     message="Profile verified successfully",
                     notification_type="profile_update",
                     is_read=False,
@@ -102,8 +104,8 @@ def seed_database():
             
             # Create admin action
             admin_action = AdminAction(
-                admin_id=admin.user_id,
-                target_user_id=users[1].user_id,
+                admin_id=admin.id,
+                target_user_id=users[1].id,
                 action="Verified jobseeker profile",
                 action_date=datetime.now(),
             )

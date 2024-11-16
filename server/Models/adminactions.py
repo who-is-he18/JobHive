@@ -10,8 +10,8 @@ class AdminAction(db.Model,SerializerMixin):
     action_date = db.Column(db.TIMESTAMP, default=db.func.current_timestamp())  # Timestamp of when the action was performed
 
     # Foreign Keys - separate columns for admin and target user
-    admin_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    target_user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    target_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # serialization rules
     serialize_rules = ('-admin.actions_as_admin', 

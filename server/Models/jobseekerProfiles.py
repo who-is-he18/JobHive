@@ -20,9 +20,9 @@ class JobseekerProfile(db.Model,SerializerMixin):
     updated_at = db.Column(db.TIMESTAMP, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())  # Updated timestamp
 
     #foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), unique=True, nullable=False)
 
-    serialize_rules = ('-user.jobseekerprofiles')
+    serialize_rules = ('-user.jobseekerprofiles',)
    
 
     def __repr__(self):

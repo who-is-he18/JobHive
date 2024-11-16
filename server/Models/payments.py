@@ -13,9 +13,9 @@ class Payment(db.Model,SerializerMixin):
     phone_number = db.Column(db.String(15), nullable=False)  # Phone number associated with the payment
 
     # foreign key
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    serialize_rules = ('-user.payments')
+    serialize_rules = ('-user.payments',)
 
 
     def __repr__(self):

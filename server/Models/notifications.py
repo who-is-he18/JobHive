@@ -12,9 +12,9 @@ class Notification(db.Model,SerializerMixin):
     created_at = db.Column(db.TIMESTAMP, default=db.func.current_timestamp())
 
     #foreign key 
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    serialize_rules = ('-user.notifications')
+    serialize_rules = ('-user.notifications',) 
 
     def __repr__(self):
         return f'<Notification {self.notification_type} for user {self.user_id}>'
