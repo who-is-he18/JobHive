@@ -1,9 +1,7 @@
 from flask import jsonify, request
 from flask_restful import Resource, reqparse
 from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token, JWTManager,jwt_required,get_jwt_identity
-
-
+from flask_jwt_extended import create_access_token
 from Models import User, db
 
 class UserResource(Resource):
@@ -65,15 +63,12 @@ class UserResource(Resource):
         }
 
     def put(self, id):
-        # Parse incoming data for update
         data = self.parser.parse_args()
 
-        # Find the user by ID
         user = User.query.get(id)
         if not user:
             return {"message": "User not found"}, 404
 
-        # Update user attributes only if new data is provided
         if data['username']:
             user.username = data['username']
         if data['phone']:
@@ -89,27 +84,24 @@ class UserResource(Resource):
         if data['is_verified'] is not None:
             user.is_verified = data['is_verified']
 
-        # Commit the changes to the database
         db.session.commit()
 
-        # Return the updated user data
         return {
             "message": "User updated successfully",
             "user": user.to_dict()
         }, 200
     
     def delete(self, id):
-        # Find the user by ID
         user = User.query.get(id)
         if not user:
             return {"message": "User not found"}, 404
 
-        # Delete the user
+        # Deleting the user will automatically trigger cascading delete on notifications
         db.session.delete(user)
         db.session.commit()
 
         return {
-            "message": f"User with ID {id} has been deleted successfully"
+            "message": f"User with ID {id} and associated notifications have been deleted successfully"
         }, 200
 class LoginResource(Resource):
     parser = reqparse.RequestParser()
