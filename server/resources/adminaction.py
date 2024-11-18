@@ -1,94 +1,95 @@
-from flask_restful import Resource, reqparse
-from flask import jsonify, request
-from Models import db
-from Models.adminactions import AdminAction
-from Models.users import User
+from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from Models import db
+from Models.users import User
+from Models.jobseekerProfiles import JobseekerProfile
+from Models.employerProfiles import EmployerProfile
 
-class AdminActionResource(Resource):
-    # Parser for input validation
-    parser = reqparse.RequestParser()
-    parser.add_argument('action', type=str, required=True, help="Action description is required")
-    parser.add_argument('target_user_id', type=int, required=True, help="Target user ID is required")
-    
-    @jwt_required()
+# Admin resource to deactivate a user (jobseeker or employer)
+class AdminDeactivateUserResource(Resource):
+    @jwt_required()  # Ensures that only authenticated users can access this route
+    def put(self, user_id):
+        # Get the current user's identity (admin)
+        current_user_id = get_jwt_identity()  # Get user_id directly
+        
+        # Fetch the admin user by ID
+        user = User.query.get(current_user_id)
+        
+        if not user or user.role != 'admin':  # Check if the user is an admin
+            return {'message': 'Unauthorized access'}, 403
+        
+        # Fetch the user by ID to deactivate
+        user_to_deactivate = User.query.get(user_id)
+        if not user_to_deactivate:
+            return {'message': 'User not found'}, 404
+        
+        # Mark the user as deactivated (using `is_verified` as a flag)
+        user_to_deactivate.is_verified = False  # Deactivating the user
+        db.session.commit()
+        return {'message': 'User deactivated successfully'}, 200
+
+
+# Admin resource to view all jobseekers
+class AdminViewJobseekersResource(Resource):
+    @jwt_required()  # Ensures that only authenticated users can access this route
     def get(self):
-        """
-        Get all admin actions.
-        Only admins should be able to access this endpoint.
-        """
-        current_user_id = get_jwt_identity()
-        current_user = User.query.get(current_user_id)
+        # Get the current user's identity (admin)
+        current_user_id = get_jwt_identity()  # Get user_id directly
         
-        if not current_user or not current_user.is_admin:
-            return {'message': 'Access denied. Admin privileges required.'}, 403
+        # Fetch the admin user by ID
+        user = User.query.get(current_user_id)
         
-        actions = AdminAction.query.all()
-        return jsonify([action.serialize() for action in actions])
-
-    @jwt_required()
-    def post(self):
-        """
-        Create a new admin action (e.g., approving files, deactivating users).
-        """
-        current_user_id = get_jwt_identity()
-        current_user = User.query.get(current_user_id)
-
-        if not current_user or not current_user.is_admin:
-            return {'message': 'Access denied. Admin privileges required.'}, 403
+        if not user or user.role != 'admin':  # Check if the user is an admin
+            return {'message': 'Unauthorized access'}, 403
         
-        data = AdminActionResource.parser.parse_args()
-        target_user = User.query.get(data['target_user_id'])
+        # Fetch all users with the role 'jobseeker'
+        jobseekers = User.query.filter_by(role='jobseeker').all()
+        print("Jobseekers found:", jobseekers)  # Debugging line
+
+        jobseeker_profiles = []
+        for jobseeker in jobseekers:
+            # Access the profile by the user_id (correct reference)
+            profile = JobseekerProfile.query.filter_by(user_id=jobseeker.id).first()  # Change to jobseeker.id
+            if profile:
+                jobseeker_profiles.append({
+                    'username': jobseeker.username,
+                    'email': jobseeker.email,
+                    'job_category': profile.job_category,
+                    'salary_expectation': float(profile.salary_expectation) if profile.salary_expectation else None  # Convert Decimal to float
+                })
         
-        if not target_user:
-            return {'message': 'Target user not found.'}, 404
+        # Return jobseeker profiles if found
+        return {'jobseekers': jobseeker_profiles}, 200
+
+
+# Admin resource to view all employers
+class AdminViewEmployersResource(Resource):
+    @jwt_required()  # Ensures that only authenticated users can access this route
+    def get(self):
+        # Get the current user's identity (admin)
+        current_user_id = get_jwt_identity()  # Get user_id directly
         
-        # Create a new admin action
-        new_action = AdminAction(
-            action=data['action'],
-            admin_id=current_user_id,
-            target_user_id=data['target_user_id']
-        )
+        # Fetch the admin user by ID
+        user = User.query.get(current_user_id)
         
-        db.session.add(new_action)
-        db.session.commit()
+        if not user or user.role != 'admin':  # Check if the user is an admin
+            return {'message': 'Unauthorized access'}, 403
         
-        return {'message': f'Action "{new_action.action}" by Admin {current_user_id} on User {target_user.id} recorded successfully.'}, 201
-    
-    @jwt_required()
-    def put(self):
-        """
-        Deactivate a user (jobseeker or employer).
-        """
-        current_user_id = get_jwt_identity()
-        current_user = User.query.get(current_user_id)
+        # Fetch all users with the role 'employer'
+        employers = User.query.filter_by(role='employer').all()
+        print("Employers found:", employers)  # Debugging line
 
-        if not current_user or not current_user.is_admin:
-            return {'message': 'Access denied. Admin privileges required.'}, 403
+        employer_profiles = []
+        for employer in employers:
+            # Access the profile by the user_id (correct reference)
+            profile = EmployerProfile.query.filter_by(user_id=employer.id).first()  # Change to employer.id
+            if profile:
+                employer_profiles.append({
+                    'username': employer.username,
+                    'email': employer.email,
+                    'company_name': profile.company_name,
+                    # Removed 'industry' as it does not exist in the model
+                })
         
-        data = request.json
-        target_user_id = data.get('target_user_id')
-
-        if not target_user_id:
-            return {'message': 'Target user ID is required.'}, 400
-
-        target_user = User.query.get(target_user_id)
-
-        if not target_user:
-            return {'message': 'Target user not found.'}, 404
-
-        # Deactivate the target user
-        target_user.is_verified = False  # Adjust this or add a custom `is_active` flag if needed
-
-        db.session.commit()
-
-        # Log the deactivation action
-        new_action = AdminAction(
-            action=f'Deactivated User {target_user_id}',
-            admin_id=current_user_id,
-            target_user_id=target_user_id
-        )
-        db.session.add(new_action)
-        db.session.commit()
-
-        return {'message': f'User {target_user_id} deactivated successfully.'}, 200
+        # Return employer profiles if found
+        return {'employers': employer_profiles}, 200
