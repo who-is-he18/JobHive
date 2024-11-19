@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
+from flask_cors import CORS 
 import os
 from resources.payment import get_access_token, initiate_payment  # Added initiate_payment import
 
@@ -18,6 +19,8 @@ SHORTCODE_PASSWORD = os.getenv("SAFARICOM_SHORTCODE_PASSWORD")
 
 # Initialize Flask app
 app = Flask(__name__)
+
+CORS(app)
 
 # Configuration settings
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Ensure this is set before db.init_app

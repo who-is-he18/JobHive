@@ -2,7 +2,10 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { useNavigate, Link } from 'react-router-dom';
 import * as Yup from 'yup';
+import axios from 'axios';
 import './signup.css';
+
+import { toast } from 'react-toastify';  
 
 const Signup = ({ onSignup }) => {
   const navigate = useNavigate();
@@ -34,17 +37,23 @@ const Signup = ({ onSignup }) => {
     onSubmit: async (values) => {
       try {
         // Save user data to local storage
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const newUser = { ...values };
-        users.push(newUser);
-        localStorage.setItem('users', JSON.stringify(users));
+        const response = await axios.post("http://127.0.0.1:5000/users",{
+          username: values.name,
+          phone:values.phone_number,
+          email:values.email,
+          role:values.role,
+          password_hash:values.password
+        });
 
-        // Trigger onSignup callback passed as a prop
-        onSignup(newUser);
-
-        // Log successful submission
-        console.log('Signup successful, redirecting...');
-
+        toast.success('Signup successful! Please log in.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         // Redirect based on role
         if (values.role === 'employer') {
           navigate('/payment');  // Redirect employers to payment page

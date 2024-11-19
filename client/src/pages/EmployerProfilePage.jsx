@@ -1,23 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import './EmployerProfilePage.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const EmployerProfilePage = () => {
     const [employer, setEmployer] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
     const { employerId } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('/jobhive.json')
-            .then(response => response.json())
-            .then(data => {
-                const employerData = data.employer_profiles.find(
-                    (profile) => profile.employer_id === parseInt(employerId)
-                );
-                setEmployer(employerData);
-            })
-            .catch(error => console.error('Error fetching employer data:', error));
-    }, [employerId]);
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const access_token = localStorage.getItem('jwt_token');
+            if (!access_token){
+                navigate('/signin');
+                return;
+            }
+
+            const response = await axios.get('http://127.0.0.1:5000/employerprofile', {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            }); 
+            const data = response.data;
+            setEmployer(data);    
+        }catch (err){
+            setError('Failed to fetch profile');
+            console.error(err);
+            if (err.response?.status === 401){
+                navigate('/signin')
+            }
+        }finally{
+            setLoading(false);
+        }
+    }
+
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -32,8 +55,6 @@ const EmployerProfilePage = () => {
     };
 
     const handleSaveChanges = () => {
-        // Here you would make an API call to save changes on the server
-        // Example: fetch('/api/employers', { method: 'PUT', body: JSON.stringify(employer) })
 
         console.log('Updated employer data:', employer);
         setIsEditing(false); 
@@ -42,6 +63,9 @@ const EmployerProfilePage = () => {
     if (!employer) {
         return <p>Loading...</p>;
     }
+
+    if (loading) return <div className="loading">Loading...</div>;
+    if (error) return <div className="error-message">{error}</div>;
 
     return (
         <div className="employer-profile">
