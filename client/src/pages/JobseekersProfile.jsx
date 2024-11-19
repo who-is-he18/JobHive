@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './JobseekersProfile.css';
 
 function JobseekersProfile() {
@@ -14,44 +15,38 @@ function JobseekersProfile() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedProfile = localStorage.getItem(`profile_${userId}`);
-        if (storedProfile) {
-            const profileData = JSON.parse(storedProfile);
-            setProfile(profileData);
-            setResumeURL(profileData.resume?.url || null);
-            setResumeFile(profileData.resume?.file || null);
-            setLoading(false);
-        } else {
-            fetchData();
-        }
-    }, [userId]);
+        fetchData();
+    }, []);
 
     const fetchData = async () => {
         try {
-            const response = await fetch('/jobhive.json');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            const access_token = localStorage.getItem('jwt_token');
+            if (!access_token) {
+                navigate('/signin');
+                return;
             }
-            const data = await response.json();
-            const userProfile = data.jobseeker_profiles.find(profile => profile.user_id === parseInt(userId));
-            const userMessages = data.messages.filter(message => message.sender_id === parseInt(userId));
 
-            if (userProfile) {
-                setProfile(userProfile);
-                setMessages(userMessages);
-                setResumeURL(userProfile.resume?.url || null);
-                setResumeFile(userProfile.resume?.file || null);
-                localStorage.setItem(`profile_${userId}`, JSON.stringify(userProfile));
-            } else {
-                setError('Profile not found');
-            }
+            const response = await axios.get('http://127.0.0.1:5000/jobseekerprofile', {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            });
+            
+            const data = response.data;
+            setProfile(data);
+            setResumeURL(data.resume);
+            setMessages([]);
         } catch (err) {
-            setError('Failed to fetch data');
+            setError('Failed to fetch profile. Please try again later.');
             console.error(err);
+            if (err.response?.status === 401) {
+                navigate('/signin');
+            }
         } finally {
             setLoading(false);
         }
     };
+    
 
     const handleEditToggle = () => {
         setIsEditing(!isEditing);
@@ -62,8 +57,9 @@ function JobseekersProfile() {
         navigate('/signin');
     };
 
-    const handleProfileSave = () => {
-        if (resumeFile && resumeURL) {
+    const handleProfileSave = async () => {
+        try {
+            if (resumeFile && resumeURL) {
             const updatedProfile = {
                 ...profile,
                 resume: {
@@ -71,10 +67,18 @@ function JobseekersProfile() {
                     file: resumeFile,
                 }
             };
-            setProfile(updatedProfile);
-            localStorage.setItem(`profile_${userId}`, JSON.stringify(updatedProfile));
+            const response = await axios.put('http://127.0.0.1:5000/jobseekerprofile', {
+                headers: {
+                    Authorization: `Bearer ${access_token}`
+                }
+            });
+
+            setProfile(response.data.profile);
+            setIsEditing(false);
+        } }catch (err) {
+            setError('Failed to save profile. Please try again later.');
+            console.error(err);
         }
-        setIsEditing(false);
     };
 
     const handleInputChange = (e) => {
@@ -85,26 +89,23 @@ function JobseekersProfile() {
         }));
     };
 
-    const handleFileUpload = (e) => {
+    const handleFileUpload = async (e) => {
         const file = e.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64File = reader.result;
-                setResumeURL(base64File);
-                setResumeFile(file);
+            const formData = new FormData();
+            formData.append('file', file);
 
-                const updatedProfile = {
-                    ...profile,
-                    resume: {
-                        url: base64File,
-                        file: file,
-                    }
-                };
-                setProfile(updatedProfile);
-                localStorage.setItem(`profile_${userId}`, JSON.stringify(updatedProfile));
-            };
-            reader.readAsDataURL(file);
+            try {
+                const response = await axios.post('/upload-resume', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                setResumeURL(response.data.url);
+            } catch (err) {
+                setError('Failed to upload resume. Please try again later.');
+                console.error(err);
+            }
         }
     };
 

@@ -52,7 +52,7 @@ def seed_database():
                     email="john@email.com",
                     phone="+254734567890",
                     password_hash=bcrypt.generate_password_hash("seeker_pass").decode('utf-8'), 
-                    role="jobseeker",
+                    role="Candidate",
                     is_verified=True,
                     created_at=datetime.now()
                 )
