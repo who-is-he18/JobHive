@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_restful import Api
 from flask_migrate import Migrate
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, jwt_required, get_jwt_identity
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
-from flask_cors import CORS 
 import os
-from resources.payment import get_access_token, initiate_payment  # Added initiate_payment import
+from resources.payment import get_access_token, initiate_payment
+from flask_cors import CORS
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,8 +20,6 @@ SHORTCODE_PASSWORD = os.getenv("SAFARICOM_SHORTCODE_PASSWORD")
 # Initialize Flask app
 app = Flask(__name__)
 
-CORS(app)
-
 # Configuration settings
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Ensure this is set before db.init_app
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking
@@ -32,15 +30,16 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 api = Api(app)
 
+# Enable CORS for all routes from a specific frontend
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+
 # Import db from Models and initialize it with app
-from Models import db
+from Models import db, Notification
+from utils import send_email_notification
 db.init_app(app)  # Initialize the db object with the app
 
 # Initialize migration tool
 migrate = Migrate(app, db)
-
-
-
 
 # Import and register API resources
 from resources.user import UserResource, LoginResource
@@ -48,7 +47,6 @@ from resources.jobseekerProfile import JobseekerProfileResource
 from resources.employerProfile import EmployerProfileResource
 from resources.notification import NotificationResource
 from resources.adminaction import AdminDeactivateUserResource, AdminViewJobseekersResource, AdminViewEmployersResource
-
 
 api.add_resource(UserResource, '/users', '/users/<int:id>')
 api.add_resource(LoginResource, '/login')
@@ -59,6 +57,7 @@ api.add_resource(AdminDeactivateUserResource, '/admin/deactivate_user/<int:user_
 api.add_resource(AdminViewJobseekersResource, '/admin/jobseekers')
 api.add_resource(AdminViewEmployersResource, '/admin/employers')
 
+
 @app.route("/test-token")
 def test_token():
     access_token = get_access_token()
@@ -66,6 +65,25 @@ def test_token():
         return f"Access Token: {access_token}"
     else:
         return "Failed to retrieve access token."
+
+# New route to get user email based on JWT token
+@app.route("/user/email", methods=["GET"])
+@jwt_required()
+def get_user_email():
+    try:
+        # Get the current user's ID from the JWT token
+        user_id = get_jwt_identity()
+
+        # Fetch user from the database
+        from Models import User
+        user = User.query.get(user_id)
+
+        if user:
+            return jsonify({"email": user.email}), 200
+        else:
+            return jsonify({"message": "User not found"}), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # New route for initiating payment
 @app.route("/initiate-payment", methods=["POST"])
@@ -92,30 +110,69 @@ def initiate_payment_route():
 def payment_callback():
     if request.is_json:
         callback_data = request.get_json()
+        print("Callback received:", callback_data)  # Debugging log
 
-        # Log the data for debugging (remove in production)
-        print("Callback received:", callback_data)
-
-        # Extract the relevant fields
         result_code = callback_data.get('Body', {}).get('stkCallback', {}).get('ResultCode')
         result_desc = callback_data.get('Body', {}).get('stkCallback', {}).get('ResultDesc')
-        merchant_request_id = callback_data.get('Body', {}).get('stkCallback', {}).get('MerchantRequestID')
         checkout_request_id = callback_data.get('Body', {}).get('stkCallback', {}).get('CheckoutRequestID')
 
-        # Example: If the ResultCode is 0, the payment was successful
         if result_code == 0:
-            # Payment was successful, update the database status to 'completed'
+            # Payment successful
             update_payment_status(checkout_request_id, "completed", result_desc)
-            print("Payment successful")
+
+            # Fetch payment details
+            from Models import Payment, User
+            payment = Payment.query.filter_by(reference_code=checkout_request_id).first()
+
+            if payment:
+                # Retrieve user details
+                user = User.query.get(payment.user_id)
+
+                if user:
+                    # Create a notification
+                    create_notification(
+                        user_id=user.id,
+                        message=f"Your payment of KSH {payment.amount} was successful.",
+                        notification_type="Payment",
+                        email=True  # Send an email notification
+                    )
+
+                    print(f"Notification sent to {user.email}")
+                else:
+                    print("User not found for payment.")
+            else:
+                print("Payment not found.")
+
         else:
-            # Payment failed, update the status to 'failed'
+            # Payment failed
             update_payment_status(checkout_request_id, "failed", result_desc)
             print("Payment failed:", result_desc)
 
-        # Respond to Safaricom with an acknowledgment
         return jsonify({"ResultCode": 0, "ResultDesc": "Received and processed successfully"})
     else:
         return jsonify({"ResultCode": 1, "ResultDesc": "Invalid request"}), 400
+
+def create_notification(user_id, message, notification_type, email=False):
+    from Models import Notification, db, User
+    from utils import send_email_notification
+
+    # Create and save notification
+    new_notification = Notification(
+        user_id=user_id,
+        message=message,
+        notification_type=notification_type
+    )
+    db.session.add(new_notification)
+    db.session.commit()
+
+    # Send email notification if requested
+    if email:
+        user = User.query.get(user_id)
+        if user:
+            email_subject = "Payment Notification"
+            email_body = f"Hello {user.username},\n\n{message}\n\nThank you!"
+            send_email_notification(user.email, email_subject, email_body)
+
 
 def update_payment_status(checkout_request_id, status, description):
     # Find the payment by checkout_request_id (or other identifiers as needed)
@@ -130,8 +187,6 @@ def update_payment_status(checkout_request_id, status, description):
         print("Payment record updated successfully.")
     else:
         print("Payment not found for CheckoutRequestID:", checkout_request_id)
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
