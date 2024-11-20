@@ -1,0 +1,79 @@
+/* General container styling */
+.create-profile {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+/* Label styling */
+form label {
+    display: block;
+    font-size: 0.9rem;
+    color: #34495e;
+    font-weight: 500;
+    margin-bottom: 10px; /* Space between label and input */
+}
+
+/* Input fields */
+form input[type="text"],
+form input[type="number"],
+form textarea,
+form input[type="file"] {
+    width: 100%; /* Full width of parent */
+    padding: 8px;
+    border: 1px solid #d1d8e0;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    background-color: #f7f9fc;
+    box-sizing: border-box; /* Ensures padding doesn't increase width */
+}
+
+/* Textarea specific */
+form textarea {
+    height: 50px; /* Reduced height */
+}
+
+/* File input specific styling */
+form input[type="file"] {
+    border: 2px dashed #a4b0be;
+    background-color: #f1f2f6;
+}
+
+/* Focus and hover effects */
+form input:focus,
+form textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    background-color: #ffffff;
+}
+
+form input:hover,
+form textarea:hover {
+    border-color: #2980b9;
+}
+
+/* Button styling */
+form button {
+    padding: 12px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-weight: 600;
+    width: 50%; /* Reduced button width */
+    align-self: center;
+}
+
+form button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}

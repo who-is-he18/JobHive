@@ -34,6 +34,7 @@ const PaymentPage = () => {
       console.error('Payment error:', error);
       alert('There was an issue with your payment. Please try again.');
     }
+
   };
 
   return (
