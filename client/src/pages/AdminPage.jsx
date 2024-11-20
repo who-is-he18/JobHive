@@ -7,57 +7,50 @@ const AdminPage = () => {
     const [employers, setEmployers] = useState([]);
     const [jobseekers, setJobseekers] = useState([]);
     const [showEmployers, setShowEmployers] = useState(false);
-    const serverURL = import.meta.env.VITE_SERVER_URL;
     const [showJobseekers, setShowJobseekers] = useState(false);
     const [statistics, setStatistics] = useState({
         employerCount: 0,
         jobseekerCount: 0,
         pendingCount: 0,
     });
+    const serverURL = import.meta.env.VITE_SERVER_URL;
+
+    const fetchData = async () => {
+        try {
+            // Get the JWT token from localStorage
+            const token = localStorage.getItem('jwt_token');
+            if (!token) {
+                console.error("JWT token not found.");
+                return;
+            }
+
+            // Fetch Employers
+            const employersResponse = await axios.get(`${serverURL}/admin/employers`, {
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+            const employersData = employersResponse.data.employers || [];
+            setEmployers(employersData);
+
+            // Fetch Jobseekers
+            const jobseekersResponse = await axios.get(`${serverURL}/admin/jobseekers`, {
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+            const jobseekersData = jobseekersResponse.data.jobseekers || [];
+            setJobseekers(jobseekersData);
+
+            // Set Statistics
+            const pendingCount = jobseekersData.filter(profile => !profile.profile_verified).length;
+            setStatistics({
+                employerCount: employersData.length,
+                jobseekerCount: jobseekersData.length,
+                pendingCount,
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error.response?.data || error.message);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Get the JWT token from localStorage
-                const token = localStorage.getItem('jwt_token'); // Match this with your login storage key
-                
-                if (!token) {
-                    console.error("JWT token not found.");
-                    return;
-                }
-
-                // Fetch Employers
-                const employersResponse = await axios.get(`${serverURL}/admin/employers`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-                const employersData = employersResponse.data.employers || [];
-                setEmployers(employersData);
-
-                // Fetch Jobseekers
-                const jobseekersResponse = await axios.get(`${serverURL}/admin/jobseekers`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-                const jobseekersData = jobseekersResponse.data.jobseekers || [];
-                setJobseekers(jobseekersData);
-
-                // Set Statistics
-                const pendingCount = jobseekersData.filter(
-                    (profile) => !profile.profile_verified
-                ).length;
-                setStatistics({
-                    employerCount: employersData.length,
-                    jobseekerCount: jobseekersData.length,
-                    pendingCount,
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error.response?.data || error.message);
-            }
-        };
-
         fetchData();
     }, []);
 
@@ -80,16 +73,10 @@ const AdminPage = () => {
             }
 
             // Make the request to deactivate the user
-            await axios.put(
-                `${serverURL}/admin/deactivate/${userId}`,
-                {},
-                {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                }
-            );
-            
+            await axios.put(`${serverURL}/admin/deactivate/${userId}`, {}, {
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+
             // Re-fetch the users after deactivating
             fetchData();
         } catch (error) {
@@ -133,12 +120,8 @@ const AdminPage = () => {
                     {employers.map((employer) => (
                         <div key={employer.user_id} className="employer-card">
                             <img src={employer.profile_pic} alt={employer.company_name} />
-                            <p>
-                                <strong>Company:</strong> {employer.company_name}
-                            </p>
-                            <p>
-                                <strong>Username:</strong> {employer.username}
-                            </p>
+                            <p><strong>Company:</strong> {employer.company_name}</p>
+                            <p><strong>Username:</strong> {employer.username}</p>
                             <button onClick={() => handleDeactivateUser(employer.user_id)}>
                                 Deactivate
                             </button>
@@ -153,15 +136,9 @@ const AdminPage = () => {
                     {jobseekers.map((jobseeker) => (
                         <div key={jobseeker.user_id} className="jobseeker-card">
                             <img src={jobseeker.profile_pic} alt={jobseeker.username} />
-                            <p>
-                                <strong>Name:</strong> {jobseeker.username}
-                            </p>
-                            <p>
-                                <strong>Bio:</strong> {jobseeker.bio}
-                            </p>
-                            <p>
-                                <strong>Job Category:</strong> {jobseeker.job_category}
-                            </p>
+                            <p><strong>Name:</strong> {jobseeker.username}</p>
+                            <p><strong>Bio:</strong> {jobseeker.bio}</p>
+                            <p><strong>Job Category:</strong> {jobseeker.job_category}</p>
                             <button onClick={() => handleDeactivateUser(jobseeker.user_id)}>
                                 Deactivate
                             </button>
