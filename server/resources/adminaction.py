@@ -43,7 +43,7 @@ class AdminViewJobseekersResource(Resource):
             return {'message': 'Unauthorized access'}, 403
         
         # Fetch all users with the role 'jobseeker'
-        jobseekers = User.query.filter_by(role='jobseeker').all()
+        jobseekers = User.query.filter_by(role='Candidate').all()
         print("Jobseekers found:", jobseekers)  # Debugging line
 
         jobseeker_profiles = []
