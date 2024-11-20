@@ -5,10 +5,9 @@ from Models.users import User
 from Models.jobseekerProfiles import JobseekerProfile
 from Models.employerProfiles import EmployerProfile
 
-# Admin resource to deactivate a user (jobseeker or employer)
 class AdminDeactivateUserResource(Resource):
     @jwt_required()  # Ensures that only authenticated users can access this route
-    def put(self, user_id):
+    def put(self, email):
         # Get the current user's identity (admin)
         current_user_id = get_jwt_identity()  # Get user_id directly
         
@@ -18,8 +17,8 @@ class AdminDeactivateUserResource(Resource):
         if not user or user.role != 'admin':  # Check if the user is an admin
             return {'message': 'Unauthorized access'}, 403
         
-        # Fetch the user by ID to deactivate
-        user_to_deactivate = User.query.get(user_id)
+        # Fetch the user by email to deactivate
+        user_to_deactivate = User.query.filter_by(email=email).first()
         if not user_to_deactivate:
             return {'message': 'User not found'}, 404
         

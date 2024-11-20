@@ -64,7 +64,7 @@ const AdminPage = () => {
         setShowEmployers(false);
     };
 
-    const handleDeactivateUser = async (userId) => {
+    const handleDeactivateUser = async (email) => {
         try {
             const token = localStorage.getItem('jwt_token');
             if (!token) {
@@ -72,13 +72,14 @@ const AdminPage = () => {
                 return;
             }
     
-            if (!userId) {
-                console.error("User ID is missing");
+            // Check if email is provided
+            if (!email) {
+                console.error("Email is missing");
                 return;
             }
     
             // Make the request to deactivate the user
-            await axios.put(`${serverURL}/admin/deactivate_user/${userId}`, {}, {
+            const response = await axios.put(`${serverURL}/admin/deactivate_user/${email}`, {}, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
     
@@ -89,7 +90,6 @@ const AdminPage = () => {
         }
     };
     
-
     return (
         <div className="admin-page">
             <header className="admin-header">
@@ -128,9 +128,7 @@ const AdminPage = () => {
                             <img src={employer.profile_pic} alt={employer.company_name} />
                             <p><strong>Company:</strong> {employer.company_name}</p>
                             <p><strong>Username:</strong> {employer.username}</p>
-                            <button onClick={() => handleDeactivateUser(employer.user_id)}>
-                                Deactivate
-                            </button>
+                            <button onClick={() => handleDeactivateUser(user.email)}>Deactivate</button>
                         </div>
                     ))}
                 </div>
@@ -145,9 +143,8 @@ const AdminPage = () => {
                             <p><strong>Name:</strong> {jobseeker.username}</p>
                             <p><strong>Bio:</strong> {jobseeker.bio}</p>
                             <p><strong>Job Category:</strong> {jobseeker.job_category}</p>
-                            <button onClick={() => handleDeactivateUser(jobseeker.user_id)}>
-                                Deactivate
-                            </button>
+                            <button onClick={() => handleDeactivateUser(user.email)}>Deactivate</button>
+
                         </div>
                     ))}
                 </div>
