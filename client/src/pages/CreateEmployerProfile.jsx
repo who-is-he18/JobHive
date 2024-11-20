@@ -33,7 +33,7 @@ const CreateEmployerProfile = () => {
         }
 
         // Send POST request to create the profile
-        const response = await axios.post('http://127.0.0.1:5000/employerprofile', values, {
+        const response = await axios.post(`${serverURL}/employerprofile`, values, {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },

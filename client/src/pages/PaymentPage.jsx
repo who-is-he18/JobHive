@@ -19,7 +19,7 @@ const PaymentPage = () => {
   const handlePayment = async () => {
     const amount = plan === 'yearly' ? 2 : 1; // Set amount based on plan
     try {
-      const response = await axios.post('http://127.0.0.1:5000/initiate-payment', {
+      const response = await axios.post(`${serverURL}/initiate-payment`, {
         amount,
         phone_number: phoneNumber,
       });

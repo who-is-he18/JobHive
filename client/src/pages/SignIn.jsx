@@ -26,7 +26,7 @@ const SignIn = () => {
     }),
     onSubmit: async (values) => {
       try {
-        const res = await axios.post("http://127.0.0.1:5000/login", {
+        const res = await axios.post(`${serverURL}/login`, {
           email: values.email,
           password_hash: values.password
         });

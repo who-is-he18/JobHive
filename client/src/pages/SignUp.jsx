@@ -37,7 +37,7 @@ const Signup = ({ onSignup }) => {
     onSubmit: async (values) => {
       try {
         // Save user data to local storage
-        const response = await axios.post("http://127.0.0.1:5000/users",{
+        const response = await axios.post(`${serverURL}/users`,{
           username: values.name,
           phone:values.phone_number,
           email:values.email,

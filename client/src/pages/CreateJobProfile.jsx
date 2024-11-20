@@ -15,6 +15,7 @@ function CreateProfile() {
         profile_verified: '',
         linkedin: '',
         resume: null,
+        email:''
     });
     const [error, setError] = useState(''); 
     const navigate = useNavigate();
@@ -47,9 +48,10 @@ function CreateProfile() {
                 availability: formData.availability,
                 linkedin: formData.linkedin,
                 resume: formData.resume,
+                email: formData.email
             };
 
-            await axios.post('http://127.0.0.1:5000/jobseekerprofile', payload, {
+            await axios.post(`${serverURL}/jobseekerprofile`, payload, {
                 headers: {
                     Authorization: `Bearer ${access_token}`,
                     'Content-Type': 'application/json',
@@ -142,6 +144,16 @@ function CreateProfile() {
                         name="linkedin"
                         value={formData.linkedin}
                         onChange={handleInputChange}
+                    />
+                </label>
+                <label>
+                    Email:
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
                     />
                 </label>
                 <label>

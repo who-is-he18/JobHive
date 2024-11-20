@@ -16,7 +16,7 @@ const EmployerLandingPage = () => {
       return;
     }
 
-    fetch('http://127.0.0.1:5000/jobseekers', {
+    fetch(`${serverURL}/jobseekers`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,

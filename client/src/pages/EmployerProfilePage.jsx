@@ -28,7 +28,7 @@ const EmployerProfilePage = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5000/employerprofile', {
+      const response = await axios.get(`${serverURL}/employerprofile`, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -75,7 +75,7 @@ const EmployerProfilePage = () => {
         verified: employer.verified || false, // Maintain the verification status
       };
 
-      const response = await axios.put('http://localhost:5000/employerprofile', payload, {
+      const response = await axios.put(`${serverURL}/employerprofile`, payload, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
@@ -100,7 +100,7 @@ const EmployerProfilePage = () => {
       try {
         const access_token = localStorage.getItem('jwt_token');
         
-        const response = await axios.delete('http://localhost:5000/employerprofile', {
+        const response = await axios.delete(`${serverURL}/employerprofile`, {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },

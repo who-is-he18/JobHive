@@ -16,7 +16,7 @@ const ViewJobseekersProfile = () => {
       return;
     }
 
-    fetch(`http://127.0.0.1:5000/view-jobseeker-profile/${profile_id}`, {
+    fetch(`${serverURL}/view-jobseeker-profile/${profile_id}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ const ViewJobseekersProfile = () => {
         <p><strong>Phone Number:</strong> 123-456-7890</p>
         <p><strong>Job Category:</strong> {profile.job_category}</p>
         <p><strong>Job Description:</strong> {profile.job_description}</p>
-        <p><strong>Email:</strong>{profile.email}</p>
+        <p><strong>Email:</strong>{profile.email}johndoe@gmail.com</p>
       </div>
       <div className="profile-details">
         <div className="availability">
@@ -99,3 +99,5 @@ const ViewJobseekersProfile = () => {
 };
 
 export default ViewJobseekersProfile;
+
+// viewjobseekersprofile

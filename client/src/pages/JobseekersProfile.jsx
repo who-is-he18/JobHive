@@ -27,7 +27,7 @@ function JobseekersProfile() {
                 return;
             }
     
-            const response = await axios.get('http://127.0.0.1:5000/jobseekerprofile', {
+            const response = await axios.get(`${serverURL}/jobseekerprofile`, {
                 headers: { Authorization: `Bearer ${access_token}` },
             });
     
@@ -86,7 +86,7 @@ function JobseekersProfile() {
             formData.append('file', file);
 
             try {
-                const response = await axios.post('/upload-resume', formData, {
+                const response = await axios.post(`${serverURL}/upload-resume`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
@@ -190,6 +190,7 @@ function JobseekersProfile() {
                     <p><strong>Salary Expectation:</strong> ksh{profile.salary_expectation}</p>
                     <p><strong>Job Description:</strong> {profile.job_description}</p>
                     <p><strong>Availability:</strong> {profile.availability ? 'Available' : 'Not Available'}</p>
+                    <p><strong>Email</strong>{profile.email}</p>
                     {renderResumeLink()}
                 </div>
             )}
