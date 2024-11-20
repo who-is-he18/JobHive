@@ -4,6 +4,7 @@ import axios from 'axios';
 import './JobseekersProfile.css';
 
 function JobseekersProfile() {
+    const [jobseeker, setJobseeker] = useState(null);
     const { userId } = useParams();
     const [profile, setProfile] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -25,14 +26,15 @@ function JobseekersProfile() {
                 navigate('/signin');
                 return;
             }
-
+    
             const response = await axios.get('http://127.0.0.1:5000/jobseekerprofile', {
-                headers: {
-                    Authorization: `Bearer ${access_token}`
-                }
+                headers: { Authorization: `Bearer ${access_token}` },
             });
-            
+    
             const data = response.data;
+            console.log(data);
+        
+    
             setProfile(data);
             setResumeURL(data.resume);
             setMessages([]);
@@ -41,45 +43,33 @@ function JobseekersProfile() {
             console.error(err);
             if (err.response?.status === 401) {
                 navigate('/signin');
+            } else if (err.response?.status === 404) {
+                navigate('/jobseeker-create-profile');
             }
         } finally {
             setLoading(false);
         }
     };
-    
 
     const handleEditToggle = () => {
-        setIsEditing(!isEditing);
-    };
+        // Employers cannot toggle edit mode
+        if (localStorage.getItem('role') !== 'Employer') {
+          setIsEditing(!isEditing);
+        }
+      };
+    
 
     const handleLogout = () => {
         localStorage.removeItem('user');
         navigate('/signin');
     };
 
-    const handleProfileSave = async () => {
-        try {
-            if (resumeFile && resumeURL) {
-            const updatedProfile = {
-                ...profile,
-                resume: {
-                    url: resumeURL,
-                    file: resumeFile,
-                }
-            };
-            const response = await axios.put('http://127.0.0.1:5000/jobseekerprofile', {
-                headers: {
-                    Authorization: `Bearer ${access_token}`
-                }
-            });
+    const handleSaveChanges = () => {
 
-            setProfile(response.data.profile);
-            setIsEditing(false);
-        } }catch (err) {
-            setError('Failed to save profile. Please try again later.');
-            console.error(err);
-        }
+        console.log('Updated employer data:', jobseeker);
+        setIsEditing(false); 
     };
+    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -126,13 +116,17 @@ function JobseekersProfile() {
 
     return (
         <div className="jobseekers-profile">
-            <div
-                className="profile-header"
-                style={{ backgroundImage: `url(${profile.profile_pic})` }}
-            >
-                <div className="profile-header-overlay"></div>
-                <h1 className="profile-name">{profile.username}</h1>
+                <div className="profile-picture">
+                {profile && profile.profile_pic ? (
+                    <img src={profile.profile_pic} alt="Profile" />
+                ) : (
+                    <p>No profile picture available</p>
+                )}
             </div>
+                    
+
+                <h1 className="profile-name">{profile.username}</h1>
+          
 
             {isEditing ? (
                 <div className="edit-profile">
@@ -141,6 +135,15 @@ function JobseekersProfile() {
                         <textarea
                             name="bio"
                             value={profile.bio}
+                            onChange={handleInputChange}
+                            className="input-field"
+                        />
+                    </label>
+                    <label>
+                        <span>Image Url:</span>
+                        <textarea
+                            name="profile_pic"
+                            value={profile.profile_pic}
                             onChange={handleInputChange}
                             className="input-field"
                         />
@@ -179,7 +182,7 @@ function JobseekersProfile() {
                         <input type="file" onChange={handleFileUpload} className="input-file" />
                     </div>
                     <div className="button-group">
-                        <button onClick={handleProfileSave} className="button save-button">Save</button>
+                        <button onClick={handleSaveChanges} className="button save-button">Save</button>
                     </div>
                 </div>
             ) : (
@@ -194,14 +197,17 @@ function JobseekersProfile() {
             )}
 
             <div className="button-group">
-                <button onClick={handleEditToggle} className="button edit-profile-button">
-                    {isEditing ? 'Cancel' : 'Edit Profile'}
-                </button>
-                <button onClick={handleLogout} className="button logout-button">
-                    Logout
-                </button>
+                {localStorage.getItem('role') !== 'Employer' && (
+                    <>
+                        <button onClick={handleEditToggle} className="button edit-profile-button">
+                            {isEditing ? 'Cancel' : 'Edit Profile'}
+                        </button>
+                        <button onClick={handleLogout} className="button logout-button">
+                            Logout
+                        </button>
+                    </>
+                )}
             </div>
-
             <h2>Messages</h2>
             <ul className="messages-list">
                 {messages.length > 0 ? (

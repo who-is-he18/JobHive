@@ -162,3 +162,7 @@
   background-color: #007bff;
   color: white;
 }
+.default-icon {
+  font-size: 40px; /* Adjust size as needed */
+  color: gray;
+}

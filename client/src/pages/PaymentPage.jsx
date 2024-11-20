@@ -21,7 +21,7 @@ const PaymentPage = () => {
     alert(`Proceeding with ${plan === 'yearly' ? 'Yearly Plan' : 'Monthly Plan'} for phone: ${phoneNumber}`);
     
     // Navigate to /ELandingPage after payment logic
-    navigate('/Signin');
+    navigate('/Elandingpage');
   };
 
   return (

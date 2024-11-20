@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from Models import JobseekerProfile, db
+from flask import request
+
 
 
 class JobseekerProfileResource(Resource):
@@ -16,15 +18,26 @@ class JobseekerProfileResource(Resource):
     parser.add_argument('profile_verified', type=bool)
     parser.add_argument('linkedin', type=str)
 
+    
     @jwt_required()
     def get(self):
-        """Fetches the current user's jobseeker profile"""
-        user_id = get_jwt_identity()  # Get the current logged-in user ID
+        """Fetches a jobseeker's profile by profile_id or the current user's profile"""
+        profile_id = request.args.get('profile_id')  # Check if 'profile_id' is passed as a query parameter
+        user_id = get_jwt_identity()
+
+        if profile_id:  # If a profile_id is provided in the query parameter
+            # Fetch the profile by profile_id
+            profile = JobseekerProfile.query.filter_by(profile_id=profile_id).first()
+            if profile:
+                return profile.to_dict(), 200
+            return {"message": "Profile not found for the given profile_id"}, 404
+
+        # If no profile_id is provided, fetch the logged-in user's profile
         profile = JobseekerProfile.query.filter_by(user_id=user_id).first()
 
         if profile:
             return profile.to_dict(), 200
-        return {"message": "Profile not found"}, 404
+        return {"message": "Profile not found for the current user"}, 404
 
     @jwt_required()
     def post(self):
@@ -48,9 +61,9 @@ class JobseekerProfileResource(Resource):
             salary_expectation=data.get('salary_expectation'),
             resume=data.get('resume'),
             profile_verified=False,
-            linkedin=data.get('linkedin')
-        )
+            linkedin=data.get('linkedin') 
 
+        )
         # Save the profile to the database
         db.session.add(new_profile)
         db.session.commit()
@@ -98,3 +111,5 @@ class JobseekerProfileResource(Resource):
         db.session.commit()
 
         return {"message": "Profile deleted successfully"}, 200
+
+    
