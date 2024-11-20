@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 function ResumeViewer() {
     const { userId } = useParams();
     const [resumeURL, setResumeURL] = useState(null);
+    const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
     useEffect(() => {
         const storedProfile = localStorage.getItem(`profile_${userId}`);

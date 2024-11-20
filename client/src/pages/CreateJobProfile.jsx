@@ -18,7 +18,10 @@ function CreateProfile() {
         email:''
     });
     const [error, setError] = useState(''); 
-    const navigate = useNavigate();
+    const navigate = useNavigate();  
+    const serverURL = import.meta.env.VITE_SERVER_URL;
+
+
 
     const handleInputChange = (e) => {
         const { name, value, files } = e.target;

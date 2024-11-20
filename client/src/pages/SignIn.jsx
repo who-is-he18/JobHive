@@ -11,6 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const SignIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
   const formik = useFormik({
     initialValues: {

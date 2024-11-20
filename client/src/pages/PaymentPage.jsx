@@ -7,6 +7,8 @@ const PaymentPage = () => {
   const [plan, setPlan] = useState('yearly');
   const [phoneNumber, setPhoneNumber] = useState('');
   const navigate = useNavigate();
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
   const handlePlanChange = (e) => {
     setPlan(e.target.value);

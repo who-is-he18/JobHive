@@ -8,6 +8,8 @@ const EmployerLandingPage = () => {
   const [displayCount, setDisplayCount] = useState(3);
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState(null);  // Track fetch error
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');

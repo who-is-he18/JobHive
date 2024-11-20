@@ -14,6 +14,8 @@ function JobseekersProfile() {
     const [resumeURL, setResumeURL] = useState(null);
     const [resumeFile, setResumeFile] = useState(null);
     const navigate = useNavigate();
+    const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
     useEffect(() => {
         fetchData();

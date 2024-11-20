@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateEmployerProfile = () => {
   const navigate = useNavigate();
+  const serverURL = import.meta.env.VITE_SERVER_URL;
   const [error, setError] = useState(null);
 
   // Form validation schema

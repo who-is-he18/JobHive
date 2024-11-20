@@ -15,6 +15,8 @@ const EmployerProfilePage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
   useEffect(() => {
     fetchData();

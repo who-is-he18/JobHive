@@ -6,6 +6,8 @@ const ViewJobseekersProfile = () => {
   const { profile_id } = useParams(); // Get profileId from the URL
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
   console.log("profile:",profile_id)
 

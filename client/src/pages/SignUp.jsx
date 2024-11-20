@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 
 const Signup = ({ onSignup }) => {
   const navigate = useNavigate();
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+
 
   const formik = useFormik({
     initialValues: {
