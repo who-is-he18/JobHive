@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -8,26 +8,9 @@ import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-// const preSeedAdmin = () => {
-//   const admins = JSON.parse(localStorage.getItem('admins')) || [];
-//   if (!admins.some(admin => admin.email === 'admin@example.com')) {
-//     const admin = {
-//       email: 'admin@example.com',
-//       password: '@adm1', 
-//     };
-//     admins.push(admin);
-//     localStorage.setItem('admins', JSON.stringify(admins));
-//     console.log('Admin credentials pre-seeded');
-//   }
-// };
-
 const SignIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   preSeedAdmin();
-  // }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -42,36 +25,42 @@ const SignIn = () => {
         .required('Password is required'),
     }),
     onSubmit: async (values) => {
-      //Admin sign-in
       try {
-      const res = await axios.post("http://127.0.0.1:5000/login",{
-          email:values.email,
-          password_hash:values.password
-      })
-      const userData = res.data;
-      console.log('Response data:', userData);
+        const res = await axios.post("http://127.0.0.1:5000/login", {
+          email: values.email,
+          password_hash: values.password
+        });
+        const userData = res.data;
+        console.log('Response data:', userData);
 
-      const { access_token } = userData;
-      localStorage.setItem('jwt_token', access_token); 
+        const { access_token } = userData;
+        localStorage.setItem('jwt_token', access_token); // Store JWT token
 
-      if(userData.user.role == 'admin'){
+        if (userData.user.role === 'admin') {
           console.log('Admin login successful:', userData);
-          toast.success('Admin login successful!');  // Success toast
+          toast.success('Admin login successful!');
           navigate('/admin/jobseekers');
-      }else if (userData.user.role == 'employer'){
-        toast.success('User login successful!'); 
-        return navigate('/employerprofile'); 
-      }else if (userData.user.role == 'Candidate'){
-        toast.success('User login successful!'); 
-        return navigate('/jobseekerprofile'); 
-      }else {
-        alert('Unknown role');
-      }
-    }catch (error) {
+        } else if (userData.user.role === 'employer') {
+          toast.success('Employer login successful!');
+          // Check if the employer has a profile
+          if (userData.user.employerprofiles.length === 0) {
+            // Redirect to profile creation if no profile exists
+            return navigate('/create-employer-profile');
+          } else {
+            // Redirect to employer profile page if profile exists
+            return navigate(`/employer-profile/${userData.user.id}`);
+          }
+        } else if (userData.user.role === 'Candidate') {
+          toast.success('Candidate login successful!');
+          return navigate(`/jobseeker-profile/${userData.user.id}`);
+        } else {
+          alert('Unknown role');
+        }
+      } catch (error) {
         console.error('Login failed:', error);
         toast.error('Login failed. Please check your credentials.');
       }
-   }
+    }
   });
 
   return (

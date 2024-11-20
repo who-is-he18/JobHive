@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './PaymentPage.css';
 
 const PaymentPage = () => {
@@ -15,13 +16,25 @@ const PaymentPage = () => {
     setPhoneNumber(e.target.value);
   };
 
-  const handlePayment = () => {
-    // Here, you can implement the payment logic or API integration
-    console.log(`Plan: ${plan}, Phone Number: ${phoneNumber}`);
-    alert(`Proceeding with ${plan === 'yearly' ? 'Yearly Plan' : 'Monthly Plan'} for phone: ${phoneNumber}`);
-    
-    // Navigate to /ELandingPage after payment logic
-    navigate('/Elandingpage');
+  const handlePayment = async () => {
+    const amount = plan === 'yearly' ? 2 : 1; // Set amount based on plan
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/initiate-payment', {
+        amount,
+        phone_number: phoneNumber,
+      });
+
+      if (response.status === 200) {
+        alert('Payment prompt sent to your phone. Please check and enter your PIN.');
+        navigate('/signin'); // Redirect to login after payment
+      } else {
+        alert('Payment failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      alert('There was an issue with your payment. Please try again.');
+    }
+
   };
 
   return (
@@ -37,7 +50,7 @@ const PaymentPage = () => {
             onChange={handlePlanChange}
           />
           <span>Yearly</span>
-          <span className="plan-price">ksh 10,000</span>
+          <span className="plan-price">KSH 2</span>
         </label>
         <label className="plan-option">
           <input
@@ -48,7 +61,7 @@ const PaymentPage = () => {
             onChange={handlePlanChange}
           />
           <span>Monthly</span>
-          <span className="plan-price">ksh 1,000</span>
+          <span className="plan-price">KSH 1</span>
         </label>
       </div>
       <input
