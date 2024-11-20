@@ -55,8 +55,7 @@ class AdminViewJobseekersResource(Resource):
                     'username': jobseeker.username,
                     'email': jobseeker.email,
                     'job_category': profile.job_category,
-                    'salary_expectation': float(profile.salary_expectation) if profile.salary_expectation else None,  # Convert Decimal to float
-                    'profile_pic': profile.profile_pic
+                    'salary_expectation': float(profile.salary_expectation) if profile.salary_expectation else None  # Convert Decimal to float
                 })
         
         # Return jobseeker profiles if found
@@ -89,8 +88,6 @@ class AdminViewEmployersResource(Resource):
                     'username': employer.username,
                     'email': employer.email,
                     'company_name': profile.company_name,
-                    'profile_picture': profile.profile_picture
-
                     # Removed 'industry' as it does not exist in the model
                 })
         
