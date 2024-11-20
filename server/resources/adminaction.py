@@ -43,8 +43,8 @@ class AdminViewJobseekersResource(Resource):
             return {'message': 'Unauthorized access'}, 403
         
         # Fetch all users with the role 'jobseeker'
-        jobseekers = User.query.filter_by(role='jobseeker').all()
-        print("Jobseekers found:", [jobseeker.username for jobseeker in jobseekers])  # Debugging line
+        jobseekers = User.query.filter_by(role='Candidate').all()
+        print("Jobseekers found:", jobseekers)  # Debugging line
 
         jobseeker_profiles = []
         for jobseeker in jobseekers:
@@ -54,26 +54,15 @@ class AdminViewJobseekersResource(Resource):
                 jobseeker_profiles.append({
                     'username': jobseeker.username,
                     'email': jobseeker.email,
-                    'profile_pic': jobseeker.profile_pic,  # Added profile_pic here
                     'job_category': profile.job_category,
-                    'salary_expectation': float(profile.salary_expectation) if profile.salary_expectation else None
+                    'salary_expectation': float(profile.salary_expectation) if profile.salary_expectation else None  # Convert Decimal to float
                 })
-            else:
-                jobseeker_profiles.append({
-                    'username': jobseeker.username,
-                    'email': jobseeker.email,
-                    'profile_pic': jobseeker.profile_pic,  # Added profile_pic here
-                    'job_category': None,
-                    'salary_expectation': None
-                })
-
-        if not jobseeker_profiles:
-            return {'message': 'No jobseekers found'}, 404
-
+        
         # Return jobseeker profiles if found
         return {'jobseekers': jobseeker_profiles}, 200
 
 
+# Admin resource to view all employers
 class AdminViewEmployersResource(Resource):
     @jwt_required()  # Ensures that only authenticated users can access this route
     def get(self):
@@ -88,7 +77,7 @@ class AdminViewEmployersResource(Resource):
         
         # Fetch all users with the role 'employer'
         employers = User.query.filter_by(role='employer').all()
-        print("Employers found:", [employer.username for employer in employers])  # Debugging line
+        print("Employers found:", employers)  # Debugging line
 
         employer_profiles = []
         for employer in employers:
@@ -98,21 +87,9 @@ class AdminViewEmployersResource(Resource):
                 employer_profiles.append({
                     'username': employer.username,
                     'email': employer.email,
-                    'profile_pic': employer.profile_pic,  # Added profile_pic here
                     'company_name': profile.company_name,
-                    'company_description': profile.company_description
+                    # Removed 'industry' as it does not exist in the model
                 })
-            else:
-                employer_profiles.append({
-                    'username': employer.username,
-                    'email': employer.email,
-                    'profile_pic': employer.profile_pic,  # Added profile_pic here
-                    'company_name': None,
-                    'company_description': None
-                })
-
-        if not employer_profiles:
-            return {'message': 'No employers found'}, 404
-
+        
         # Return employer profiles if found
         return {'employers': employer_profiles}, 200
