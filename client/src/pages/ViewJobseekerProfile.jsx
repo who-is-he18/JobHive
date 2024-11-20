@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ViewJobseekersProfile.css';
 
-const JobseekerProfile = () => {
+const ViewJobseekersProfile = () => {
   const { profile_id } = useParams(); // Get profileId from the URL
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
+
+  console.log("profile:",profile_id)
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');
@@ -77,8 +79,7 @@ const JobseekerProfile = () => {
         <p><strong>Phone Number:</strong> 123-456-7890</p>
         <p><strong>Job Category:</strong> {profile.job_category}</p>
         <p><strong>Job Description:</strong> {profile.job_description}</p>
-       
-        <p><strong>Email:</strong> {profile.email}</p>
+        <p><strong>Email:</strong>{profile.email}</p>
       </div>
       <div className="profile-details">
         <div className="availability">
@@ -97,4 +98,4 @@ const JobseekerProfile = () => {
   );
 };
 
-export default JobseekerProfile;
+export default ViewJobseekersProfile;

@@ -126,8 +126,6 @@ function JobseekersProfile() {
                     
 
                 <h1 className="profile-name">{profile.username}</h1>
-          
-
             {isEditing ? (
                 <div className="edit-profile">
                     <label>

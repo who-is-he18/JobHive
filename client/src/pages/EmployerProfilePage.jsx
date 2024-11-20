@@ -178,6 +178,7 @@ const EmployerProfilePage = () => {
             <>
               <button className="edit-button" onClick={handleEditToggle}>Edit Profile</button>
               <button className="delete-button" onClick={handleDelete}>Delete</button>
+              <button className="landing-page-button" onClick={() => navigate('/ELandingpage')}>Go to Employer Landing Page</button>
             </>
           )}
         </div>

@@ -39,7 +39,7 @@ const SignIn = () => {
         if (userData.user.role === 'admin') {
           console.log('Admin login successful:', userData);
           toast.success('Admin login successful!');
-          navigate('/admin/jobseekers');
+          navigate('/admin');
         } else if (userData.user.role === 'employer') {
           toast.success('Employer login successful!');
           // Check if the employer has a profile
@@ -52,7 +52,15 @@ const SignIn = () => {
           }
         } else if (userData.user.role === 'Candidate') {
           toast.success('Candidate login successful!');
-          return navigate(`/jobseeker-profile/${userData.user.id}`);
+
+          // Check if the candidate has a profile
+          if (userData.user.jobseekerprofiles.length === 0) {
+            // Redirect to profile creation if no profile exists
+            return navigate('/jobseeker-create-profile');
+          } else {
+            // Redirect to candidate profile page if profile exists
+            return navigate(`/jobseeker-profile/${userData.user.id}`);
+          }
         } else {
           alert('Unknown role');
         }
