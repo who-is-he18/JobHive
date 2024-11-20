@@ -36,7 +36,7 @@ const AdminPage = () => {
                 setEmployers(employersData);
 
                 // Fetch Jobseekers
-                const jobseekersResponse = await axios.get(`${serverURL}/jobseekers`, {
+                const jobseekersResponse = await axios.get(`${serverURL}/admin/jobseekers`, {
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
