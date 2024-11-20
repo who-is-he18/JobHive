@@ -18,10 +18,9 @@ const AdminPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Get the JWT token from localStorage (assuming it's stored there after login)
-                const token = localStorage.getItem('jwtToken'); // Replace with your token storage logic
+                // Get the JWT token from localStorage
+                const token = localStorage.getItem('jwt_token'); // Match this with your login storage key
                 
-                // If no token is found, we can return early or handle this case appropriately
                 if (!token) {
                     console.error("JWT token not found.");
                     return;
@@ -72,6 +71,32 @@ const AdminPage = () => {
         setShowEmployers(false);
     };
 
+    const handleDeactivateUser = async (userId) => {
+        try {
+            const token = localStorage.getItem('jwt_token');
+            if (!token) {
+                console.error("JWT token not found.");
+                return;
+            }
+
+            // Make the request to deactivate the user
+            await axios.put(
+                `${serverURL}/admin/deactivate/${userId}`,
+                {},
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    },
+                }
+            );
+            
+            // Re-fetch the users after deactivating
+            fetchData();
+        } catch (error) {
+            console.error('Error deactivating user:', error.response?.data || error.message);
+        }
+    };
+
     return (
         <div className="admin-page">
             <header className="admin-header">
@@ -114,6 +139,9 @@ const AdminPage = () => {
                             <p>
                                 <strong>Username:</strong> {employer.username}
                             </p>
+                            <button onClick={() => handleDeactivateUser(employer.user_id)}>
+                                Deactivate
+                            </button>
                         </div>
                     ))}
                 </div>
@@ -134,6 +162,9 @@ const AdminPage = () => {
                             <p>
                                 <strong>Job Category:</strong> {jobseeker.job_category}
                             </p>
+                            <button onClick={() => handleDeactivateUser(jobseeker.user_id)}>
+                                Deactivate
+                            </button>
                         </div>
                     ))}
                 </div>
