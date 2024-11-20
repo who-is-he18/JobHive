@@ -15,51 +15,51 @@ const AdminPage = () => {
         pendingCount: 0,
     });
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Get the JWT token from localStorage
-                const token = localStorage.getItem('jwt_token'); // Match this with your login storage key
-                
-                if (!token) {
-                    console.error("JWT token not found.");
-                    return;
-                }
-
-                // Fetch Employers
-                const employersResponse = await axios.get(`${serverURL}/admin/employers`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-                const employersData = employersResponse.data.employers || [];
-                setEmployers(employersData);
-
-                // Fetch Jobseekers
-                const jobseekersResponse = await axios.get(`${serverURL}/admin/jobseekers`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-                const jobseekersData = jobseekersResponse.data.jobseekers || [];
-                setJobseekers(jobseekersData);
-
-                // Set Statistics
-                const pendingCount = jobseekersData.filter(
-                    (profile) => !profile.profile_verified
-                ).length;
-                setStatistics({
-                    employerCount: employersData.length,
-                    jobseekerCount: jobseekersData.length,
-                    pendingCount,
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error.response?.data || error.message);
+    // Function to fetch data
+    const fetchData = async () => {
+        try {
+            const token = localStorage.getItem('access_token'); // Use access_token instead of jwt_token
+            
+            if (!token) {
+                console.error("JWT token not found.");
+                return;
             }
-        };
 
-        fetchData();
-    }, []);
+            // Fetch Employers
+            const employersResponse = await axios.get(`${serverURL}/admin/employers`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            const employersData = employersResponse.data.employers || [];
+            setEmployers(employersData);
+
+            // Fetch Jobseekers
+            const jobseekersResponse = await axios.get(`${serverURL}/admin/jobseekers`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            const jobseekersData = jobseekersResponse.data.jobseekers || [];
+            setJobseekers(jobseekersData);
+
+            // Set Statistics
+            const pendingCount = jobseekersData.filter(
+                (profile) => !profile.profile_verified
+            ).length;
+            setStatistics({
+                employerCount: employersData.length,
+                jobseekerCount: jobseekersData.length,
+                pendingCount,
+            });
+        } catch (error) {
+            console.error('Error fetching data:', error.response?.data || error.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();  // Initial data fetch on page load
+    }, []); // Run only once on component mount
 
     const handleViewEmployers = () => {
         setShowEmployers(true);
@@ -73,7 +73,7 @@ const AdminPage = () => {
 
     const handleDeactivateUser = async (userId) => {
         try {
-            const token = localStorage.getItem('jwt_token');
+            const token = localStorage.getItem('access_token');
             if (!token) {
                 console.error("JWT token not found.");
                 return;
@@ -81,7 +81,7 @@ const AdminPage = () => {
 
             // Make the request to deactivate the user
             await axios.put(
-                `${serverURL}/admin/deactivate/${userId}`,
+                `${serverURL}/admin/deactivate_user/${userId}`,
                 {},
                 {
                     headers: {
@@ -91,7 +91,7 @@ const AdminPage = () => {
             );
             
             // Re-fetch the users after deactivating
-            fetchData();
+            fetchData();  // Trigger re-fetch
         } catch (error) {
             console.error('Error deactivating user:', error.response?.data || error.message);
         }
