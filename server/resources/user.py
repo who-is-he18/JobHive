@@ -36,7 +36,7 @@ class UserResource(Resource):
         # 2. Encrypt the password
         hash = generate_password_hash(data['password_hash']).decode('utf-8')
 
-        is_verified = bool(data['is_verified'])
+        # is_verified = bool(data['is_verified'])
         is_admin = data.get('is_admin', False) or False
 
         # 3. Save the user to the db
@@ -47,7 +47,6 @@ class UserResource(Resource):
             email=data['email'],
             role=data['role'],
             is_admin=is_admin,
-            is_verified=is_verified
         )
 
         db.session.add(user)

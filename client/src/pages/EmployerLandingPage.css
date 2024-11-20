@@ -3,7 +3,7 @@
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
-  background-color: #f8f9fa; /* Light background */
+  background-color: #f8f9fa; 
 }
 
 .employer-details {
@@ -16,7 +16,7 @@
 .employer-info {
   flex: 1 1 250px;
   padding: 20px;
-  background-color: #ffffff; /* White card background */
+  background-color: #ffffff; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   text-align: center;
@@ -85,10 +85,10 @@
 .candidate-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Adjust spacing between candidate cards */
+  gap: 20px; 
   padding: 0;
   list-style-type: none;
-  justify-content: center; /* Center-align the candidates */
+  justify-content: center; 
 }
 
 .candidate-item {
@@ -96,9 +96,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1 1 200px; /* Adjusts the width of the candidate card */
+  flex: 1 1 200px;
   padding: 15px;
-  margin-bottom: 0; /* Remove extra margin for row alignment */
+  margin-bottom: 0; 
   background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 5px;
