@@ -33,7 +33,7 @@ jwt = JWTManager(app)
 api = Api(app)
 
 # Enable CORS for all routes from a specific frontend
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins": "https://jobhive-gi9i.onrender.com"}})
 
 # Import db from Models and initialize it with app
 from Models import db, Notification
