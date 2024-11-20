@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './HomePage.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./HomePage.css";
 
 const HomePage = () => {
   const heroImageUrl =
@@ -14,26 +14,38 @@ const HomePage = () => {
           <h1>JobHive</h1>
         </div>
         <ul className="nav-links">
-          <li><Link to="#hero">Home</Link></li>
+          <li>
+            <Link to="#hero" className="nav-link">
+              Home
+            </Link>
+          </li>
         </ul>
         <div className="auth-buttons">
-          <Link to="/signin" className="signup-button">Sign in</Link>
-          <Link to="/signup" className="signup-button">Sign up</Link>
+          <Link to="/signin" className="auth-button">
+            Sign in
+          </Link>
+          <Link to="/signup" className="auth-button">
+            Sign up
+          </Link>
         </div>
       </nav>
 
       {/* Hero Section */}
       <section id="hero" className="hero">
         <div className="hero-content">
-          <h2>Hire the best, Leave the rest to us</h2>
-          <p>
+          <h2 className="hero-title">Hire the best, Leave the rest to us</h2>
+          <p className="hero-description">
             With our custom-made platform, get access to thousands of jobs and
             top-notch talent from across the globe. We handle the hard parts so
             that you don’t have to.
           </p>
           <div className="hero-buttons">
-            <Link to="/signup" className="get-started-button">Get started</Link>
-            <Link to="/explore-jobs" className="explore-jobs-button">Explore jobs</Link>
+            <Link to="/signup" className="button primary-button">
+              Get started
+            </Link>
+            <Link to="/explore-jobs" className="button secondary-button">
+              Explore jobs
+            </Link>
           </div>
         </div>
         <div className="hero-image">
@@ -43,8 +55,8 @@ const HomePage = () => {
 
       {/* About Us Section */}
       <section id="about-us" className="about-us">
-        <h1>About Us</h1>
-        <p>
+        <h1 className="section-title">About Us</h1>
+        <p className="section-description">
           JobHive is a premier platform designed to connect job seekers with
           employers worldwide. Our mission is to simplify the hiring process by
           providing a user-friendly interface and powerful tools for both
@@ -55,14 +67,14 @@ const HomePage = () => {
 
       {/* Contact Us Section */}
       <section id="contact-us" className="contact-us">
-        <h1>Contact Us</h1>
-        <p>
+        <h1 className="section-title">Contact Us</h1>
+        <p className="section-description">
           We'd love to hear from you! Whether you have questions, feedback, or
           need assistance, feel free to reach out to us:
         </p>
-        <ul>
+        <ul className="contact-details">
           <li>Email: support@jobhive.com</li>
-          <li>Phone: +254 712 345 678</li> 
+          <li>Phone: +254 712 345 678</li>
           <li>Address: 123 Tech Lane, Nairobi City</li>
         </ul>
       </section>

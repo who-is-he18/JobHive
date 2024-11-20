@@ -11,10 +11,7 @@ import JobseekersProfile from './pages/JobseekersProfile';
 import HomePage from './pages/HomePage';
 import EmployerProfilePage from './pages/EmployerProfilePage';
 import ResumeViewer from './pages/ResumeViewer';
-
-import { ToastContainer } from 'react-toastify';  
-import 'react-toastify/dist/ReactToastify.css';  
-
+import CreateEmployerProfile from './pages/CreateEmployerProfile';
 
 function App() {
     return (
@@ -23,17 +20,16 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
                 <Route path="/signin" element={<SignIn />} />
-               <Route path="/Elandingpage" element={<EmployerLandingPage />} />
+                <Route path="/Elandingpage" element={<EmployerLandingPage />} />
                 <Route path="/payment" element={<PaymentPage />} />
                 <Route path="/message/:profileId" element={<MessagePage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/jobseekerprofile" element={<JobseekersProfile />} />
                 <Route path="/view-jobseeker-profile/:profileId" element={<ViewJobseekerProfile />} />
-                <Route path="/employerprofile" element={<EmployerProfilePage />} />
+                <Route path="/employer-profile/:id" element={<EmployerProfilePage />} /> {/* Add dynamic id here */}
                 <Route path="/resume-view/:userId" element={<ResumeViewer />} />
-
+                <Route path="/create-employer-profile" element={<CreateEmployerProfile />} />
             </Routes>
-            <ToastContainer />
         </div>
     );
 }
