@@ -11,6 +11,7 @@ class JobseekerProfile(db.Model,SerializerMixin):
     profile_pic = db.Column(db.Text)
     bio = db.Column(db.Text)
     job_description = db.Column(db.Text)
+    email = db.Column(db.Text, nullable=True)
     availability = db.Column(db.Boolean, default=True)
     job_category = db.Column(db.String(50))
     salary_expectation = db.Column(db.Numeric(10, 2))

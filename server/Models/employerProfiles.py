@@ -10,6 +10,7 @@ class EmployerProfile(db.Model,SerializerMixin):
     company_name = db.Column(db.String(100))
     company_email = db.Column(db.String(100))
     profile_pic = db.Column(db.Text)
+    email = db.Column(db.String, nullable=True)
     what_were_looking_for = db.Column(db.Text)
     verified = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.TIMESTAMP, default=db.func.current_timestamp())  # Timestamp for profile creation

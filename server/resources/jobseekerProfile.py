@@ -17,6 +17,7 @@ class JobseekerProfileResource(Resource):
     parser.add_argument('resume', type=str)
     parser.add_argument('profile_verified', type=bool)
     parser.add_argument('linkedin', type=str)
+    parser.add_argument('email', type=str)
 
     
     @jwt_required()
@@ -61,7 +62,8 @@ class JobseekerProfileResource(Resource):
             salary_expectation=data.get('salary_expectation'),
             resume=data.get('resume'),
             profile_verified=False,
-            linkedin=data.get('linkedin') 
+            linkedin=data.get('linkedin'),
+            email=data.get('email') 
 
         )
         # Save the profile to the database
