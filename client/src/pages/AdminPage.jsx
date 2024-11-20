@@ -63,7 +63,7 @@ const AdminPage = () => {
         setShowJobseekers(true);
         setShowEmployers(false);
     };
-
+    
     const handleDeactivateUser = async (email) => {
         try {
             const token = localStorage.getItem('jwt_token');
@@ -128,7 +128,7 @@ const AdminPage = () => {
                             <img src={employer.profile_pic} alt={employer.company_name} />
                             <p><strong>Company:</strong> {employer.company_name}</p>
                             <p><strong>Username:</strong> {employer.username}</p>
-                            <button onClick={() => handleDeactivateUser(user.email)}>Deactivate</button>
+                            <button onClick={() => handleDeactivateUser(employer.email)}>Deactivate</button>
                         </div>
                     ))}
                 </div>
@@ -143,8 +143,7 @@ const AdminPage = () => {
                             <p><strong>Name:</strong> {jobseeker.username}</p>
                             <p><strong>Bio:</strong> {jobseeker.bio}</p>
                             <p><strong>Job Category:</strong> {jobseeker.job_category}</p>
-                            <button onClick={() => handleDeactivateUser(user.email)}>Deactivate</button>
-
+                            <button onClick={() => handleDeactivateUser(jobseeker.email)}>Deactivate</button>
                         </div>
                     ))}
                 </div>
