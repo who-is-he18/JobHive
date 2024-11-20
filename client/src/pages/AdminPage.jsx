@@ -71,18 +71,24 @@ const AdminPage = () => {
                 console.error("JWT token not found.");
                 return;
             }
-
+    
+            if (!userId) {
+                console.error("User ID is missing");
+                return;
+            }
+    
             // Make the request to deactivate the user
-            await axios.put(`${serverURL}/admin/deactivate/${userId}`, {}, {
+            await axios.put(`${serverURL}/admin/deactivate_user/${userId}`, {}, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
-
+    
             // Re-fetch the users after deactivating
             fetchData();
         } catch (error) {
             console.error('Error deactivating user:', error.response?.data || error.message);
         }
     };
+    
 
     return (
         <div className="admin-page">
