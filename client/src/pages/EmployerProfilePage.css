@@ -1,0 +1,62 @@
+.employer-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-card {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-picture img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-info {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.description-section {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.description-section h4 {
+    margin-bottom: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-button, .delete-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+}
