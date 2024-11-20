@@ -11,9 +11,12 @@ import JobseekersProfile from './pages/JobseekersProfile';
 import HomePage from './pages/HomePage';
 import EmployerProfilePage from './pages/EmployerProfilePage';
 import ResumeViewer from './pages/ResumeViewer';
+import ViewJobseekersProfile from './pages/ViewJobseekerProfile';
 
 import { ToastContainer } from 'react-toastify';  
 import 'react-toastify/dist/ReactToastify.css';  
+import CreateProfile from './pages/CreateJobProfile';
+
 
 
 function App() {
@@ -28,7 +31,9 @@ function App() {
                 <Route path="/message/:profileId" element={<MessagePage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/jobseekerprofile" element={<JobseekersProfile />} />
-                <Route path="/view-jobseeker-profile/:profileId" element={<ViewJobseekerProfile />} />
+                <Route path="/jobseekerprofile/:user_id" element={<JobseekersProfile />} />
+                <Route path="/jobseeker-create-profile" element={<CreateProfile />} />
+                <Route path="/view-jobseeker-profile/:profile_id" element={<ViewJobseekerProfile />} />
                 <Route path="/employerprofile" element={<EmployerProfilePage />} />
                 <Route path="/resume-view/:userId" element={<ResumeViewer />} />
 

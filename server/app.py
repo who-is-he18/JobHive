@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
 from flask_cors import CORS 
 import os
+from datetime import timedelta
 from resources.payment import get_access_token, initiate_payment  # Added initiate_payment import
 
 # Load environment variables from .env file
@@ -25,7 +26,8 @@ CORS(app)
 # Configuration settings
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Ensure this is set before db.init_app
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking
-app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')  # JWT Secret Key from .env
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=12)  # JWT Secret Key from .env
 
 # Initialize other extensions
 bcrypt = Bcrypt(app)
@@ -47,17 +49,20 @@ from resources.user import UserResource, LoginResource
 from resources.jobseekerProfile import JobseekerProfileResource
 from resources.employerProfile import EmployerProfileResource
 from resources.notification import NotificationResource
+from resources.jobseekers import JobseekersResource, ViewJobseekerProfileResource
 from resources.adminaction import AdminDeactivateUserResource, AdminViewJobseekersResource, AdminViewEmployersResource
 
 
 api.add_resource(UserResource, '/users', '/users/<int:id>')
 api.add_resource(LoginResource, '/login')
-api.add_resource(JobseekerProfileResource, '/jobseekerprofile')
+api.add_resource(JobseekerProfileResource, '/jobseekerprofile','/jobseeker-create-profile')
 api.add_resource(EmployerProfileResource, '/employerprofile')
 api.add_resource(NotificationResource, '/notification')
 api.add_resource(AdminDeactivateUserResource, '/admin/deactivate_user/<int:user_id>')
 api.add_resource(AdminViewJobseekersResource, '/admin/jobseekers')
 api.add_resource(AdminViewEmployersResource, '/admin/employers')
+api.add_resource(JobseekersResource, '/jobseekers')
+api.add_resource(ViewJobseekerProfileResource, '/view-jobseeker-profile/<int:profile_id>')  
 
 @app.route("/test-token")
 def test_token():

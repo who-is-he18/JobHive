@@ -63,7 +63,7 @@ const SignIn = () => {
         return navigate('/employerprofile'); 
       }else if (userData.user.role == 'Candidate'){
         toast.success('User login successful!'); 
-        return navigate(`/jobseekerprofile`); 
+        return navigate('/jobseekerprofile'); 
       }else {
         alert('Unknown role');
       }

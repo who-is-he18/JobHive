@@ -1,110 +1,130 @@
 /* JobseekersProfile.css */
+body {
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .jobseekers-profile {
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 40px auto;
     background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    padding: 30px;
+    transition: transform 0.3s ease;
 }
 
-.profile-header {
-    height: 300px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
+.jobseekers-profile:hover {
+    transform: translateY(-10px);
+}
+
+.profile-picture {
     display: flex;
-    align-items: center;
     justify-content: center;
-    border-bottom: 5px solid #3498db;
-    color: #fff;
-    text-align: center;
+    margin-bottom: 25px;
 }
 
-.profile-header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay for better text contrast */
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #3498db;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-name {
-    position: relative;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0;
-    z-index: 1;
-}
-
-.profile-category {
-    font-size: 1.2rem;
-    margin-top: 5px;
-    z-index: 1;
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
 .profile-info {
-    padding: 20px;
-    color: #333;
-    font-size: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
 }
 
 .profile-info p {
     margin-bottom: 15px;
+    color: #34495e;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e0e4e7;
+    padding-bottom: 10px;
+}
+
+.profile-info p:last-child {
+    border-bottom: none;
+}
+
+.profile-info p strong {
+    color: #2980b9;
+    min-width: 150px;
+}
+
+.edit-profile {
+    display: grid;
+    gap: 20px;
 }
 
 .edit-profile label {
-    display: block;
-    margin-bottom: 15px;
-    color: #444;
+    display: grid;
+    gap: 8px;
 }
 
-.input-field {
+.input-field, .input-file {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 12px;
+    border: 2px solid #e0e4e7;
     border-radius: 8px;
-    margin-top: 5px;
-    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
 
-.input-file {
-    margin-top: 10px;
+.input-field:focus, .input-file:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
-.file-upload {
-    margin-bottom: 15px;
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .button {
-    padding: 12px 20px;
+    padding: 12px 25px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s, transform 0.2s;
-    margin-right: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
 .save-button {
     background-color: #2ecc71;
-    color: #fff;
+    color: white;
 }
 
 .edit-profile-button {
     background-color: #3498db;
-    color: #fff;
+    color: white;
 }
 
 .logout-button {
     background-color: #e74c3c;
-    color: #fff;
+    color: white;
 }
 
 .button:hover {
     transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .messages-list {
@@ -113,34 +133,43 @@
 }
 
 .message-item {
-    padding: 12px;
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    color: #333;
+    background-color: #ecf0f1;
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+.message-item:hover {
+    transform: translateX(10px);
 }
 
 .no-messages {
     text-align: center;
-    color: #777;
+    color: #7f8c8d;
+    font-style: italic;
 }
 
 .loading, .error-message {
     text-align: center;
-    color: #333;
-    font-size: 1.2rem;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    color: #555;
 }
 
 @media (max-width: 600px) {
-    .profile-header {
-        height: 200px;
+    .jobseekers-profile {
+        margin: 20px 15px;
+        padding: 20px;
     }
 
-    .profile-name {
-        font-size: 1.8rem;
+    .button-group {
+        flex-direction: column;
     }
 
-    .profile-category {
-        font-size: 1rem;
+    .button {
+        width: 100%;
     }
 }

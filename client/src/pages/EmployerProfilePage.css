@@ -1,129 +1,202 @@
-/* EmployerProfilePage.css */
-
+/* JobseekersProfile.css */
 .employer-profile {
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .profile-picture img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #ddd;
-    margin-bottom: 20px;
-  }
-  
-  .profile-info {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .profile-info p,
-  .profile-info label {
-    font-size: 1rem;
-    color: #333;
-    margin: 8px 0;
-  }
-  
-  .profile-info input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .description-section {
-    width: 100%;
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .description-section h4 {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  .description-section p,
-  .description-section textarea {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  .description-section textarea {
-    width: 100%;
-    height: 80px;
-    padding: 8px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
-  }
-  
-  .action-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .action-buttons button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .edit-button {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .edit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .save-button {
-    background-color: #28a745;
-    color: #fff;
-  }
-  
-  .save-button:hover {
-    background-color: #218838;
-  }
-  
-  .cancel-button {
-    background-color: #6c757d;
-    color: #fff;
-  }
-  
-  .cancel-button:hover {
-    background-color: #5a6268;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-    color: #fff;
-  }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
-  
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-picture img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.profile-info {
+  width: 90%;
+  text-align: left;  /* Changed to left alignment */
+  margin-bottom: 20px;
+  padding: 20px 20px;  /* Added padding */
+}
+
+.profile-info p {
+  font-size: 1rem;
+  color: #333;
+  margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.profile-info p strong {
+  font-weight: 600;
+  color: #555;
+  min-width: 150px;
+}
+
+.profile-info label {
+  font-size: 1rem;
+  color: #333;
+  margin: 12px 0;
+  display: block;
+}
+
+.profile-info input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.description-section {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.description-section h4 {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.description-section p,
+.description-section textarea {
+  font-size: 1rem;
+  color: #333;
+}
+
+.description-section textarea {
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;  /* Center the buttons */
+}
+
+.action-buttons button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.save-button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.save-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Added styles for messages section */
+.messages-list {
+  list-style: none;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+.message-item {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.no-messages {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+/* For when the profile is in edit mode */
+.edit-profile {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.edit-profile label {
+  display: block;
+  margin: 12px 0;
+}
+
+.edit-profile input,
+.edit-profile textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-profile textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+/* Update profile name styling */
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  margin: 10px 0 20px 0;
+  text-align: center;
+}
