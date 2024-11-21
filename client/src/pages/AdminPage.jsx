@@ -102,11 +102,6 @@ const AdminPage = () => {
                     <p>Job seekers: {statistics.jobseekerCount}</p>
                     <p>Total: {statistics.employerCount + statistics.jobseekerCount}</p>
                 </div>
-
-                <div className="pending-verifications">
-                    <h3>Pending verifications</h3>
-                    <p>Pending: {statistics.pendingCount}</p>
-                </div>
             </section>
 
             <div className="button-group">

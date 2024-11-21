@@ -1,135 +1,173 @@
 /* AdminPage.css */
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
 .admin-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
 }
 
 .admin-header {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 800px;
+    background-color: #4CAF50;
+    color: white;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .admin-name {
-    font-size: 18px;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .logout-icon {
-    font-size: 20px;
+    font-size: 1.5rem;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: transform 0.3s;
 }
 
 .logout-icon:hover {
-    color: #ff4d4d;
+    transform: scale(1.1);
 }
 
 .stats-section {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+    margin: 20px 0;
+    width: 90%;
     max-width: 800px;
-    margin-bottom: 20px;
-}
-
-.user-stats, .pending-verifications {
-    flex: 1;
-    padding: 15px;
-    background-color: #fff;
+    background-color: white;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.user-stats h3, .pending-verifications h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
+.user-stats h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.25rem;
+    color: #4CAF50;
 }
 
-.user-stats p, .pending-verifications p {
-    font-size: 16px;
-    color: #555;
+.user-stats p {
+    margin: 5px 0;
+    font-size: 1rem;
 }
 
 .button-group {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
-.view-employers-btn, .view-candidates-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #007bff;
+button {
+    padding: 10px 15px;
+    font-size: 1rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.view-employers-btn:hover, .view-candidates-btn:hover {
-    background-color: #0056b3;
+.view-employers-btn {
+    background-color: #2196F3;
+    color: white;
 }
 
-.employers-list, .jobseekers-list {
-    width: 100%;
+.view-employers-btn:hover {
+    background-color: #1976D2;
+}
+
+.view-candidates-btn {
+    background-color: #FF5722;
+    color: white;
+}
+
+.view-candidates-btn:hover {
+    background-color: #E64A19;
+}
+
+.employers-list, .jobseekers-list, .deactivated-users {
+    width: 90%;
     max-width: 800px;
-    padding: 15px;
-    background-color: #fff;
+    margin: 20px 0;
+    background-color: white;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.employers-list h3, .jobseekers-list h3 {
-    font-size: 20px;
+h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.5rem;
     color: #333;
-    margin-bottom: 15px;
 }
 
-.employer-card, .jobseeker-card {
+.employer-card, .jobseeker-card, .deactivated-user-card {
     display: flex;
     align-items: center;
+    gap: 15px;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.employer-card:last-child, .jobseeker-card:last-child {
-    border-bottom: none;
+.employer-card:hover, .jobseeker-card:hover, .deactivated-user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.employer-card img, .jobseeker-card img {
-    width: 60px;
-    height: 60px;
+img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.employer-card p, .jobseeker-card p {
-    font-size: 14px;
-    color: #555;
-    margin: 5px 0;
+button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.employer-card strong, .jobseeker-card strong {
-    font-weight: bold;
+button:hover {
+    background-color: #d32f2f;
+}
+
+button.activate-btn {
+    background-color: #4CAF50;
+}
+
+button.activate-btn:hover {
+    background-color: #388E3C;
+}
+
+@media (max-width: 768px) {
+    .admin-header, .stats-section, .button-group, .employers-list, .jobseekers-list, .deactivated-users {
+        width: 95%;
+    }
+
+    .employer-card, .jobseeker-card, .deactivated-user-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    img {
+        margin-bottom: 10px;
+    }
 }
