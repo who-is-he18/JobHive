@@ -136,7 +136,7 @@ const AdminPage = () => {
                         <div key={jobseeker.user_id} className="jobseeker-card">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-HAN6UFnIHXs29W0hyYpQHh-7TOAgxzjbQ&s" alt={jobseeker.username} />
                             <p><strong>Name:</strong> {jobseeker.username}</p>
-                            <p><strong>Bio:</strong> {jobseeker.bio}</p>
+                            <p><strong>Email:</strong> {jobseeker.email}</p>
                             <p><strong>Job Category:</strong> {jobseeker.job_category}</p>
                             <button onClick={() => handleDeactivateUser(jobseeker, "jobseeker")}>
                                 Deactivate
