@@ -65,6 +65,7 @@ const AdminPage = () => {
     };
     
     const handleDeactivateUser = async (email) => {
+        console.log("Deactivating user with email:", email); // Add this line to check if it's triggered
         try {
             const token = localStorage.getItem('jwt_token');
             if (!token) {
@@ -72,16 +73,16 @@ const AdminPage = () => {
                 return;
             }
     
-            // Check if email is provided
             if (!email) {
                 console.error("Email is missing");
                 return;
             }
     
-            // Make the request to deactivate the user
             const response = await axios.put(`${serverURL}/admin/deactivate_user/${email}`, {}, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
+    
+            console.log('Deactivation response:', response.data); // Log the response
     
             // Re-fetch the users after deactivating
             fetchData();
@@ -89,6 +90,7 @@ const AdminPage = () => {
             console.error('Error deactivating user:', error.response?.data || error.message);
         }
     };
+    
     
     return (
         <div className="admin-page">
