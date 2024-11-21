@@ -12,13 +12,13 @@ JobHive is a platform designed to connect job seekers with employers, featuring 
 7. Payment Integration: Employers must pay to view profiles and contact job seekers, powered by Safaricom's Daraja API.<br>
 
 `Tech Stack`<br>
-Frontend: React, Redux Toolkit, CSS<br>
-Backend: Flask, PostgreSQL<br>
-Database: PostgreSQL<br>
-Payment Integration: Safaricom Daraja API<br>
-Testing: Jest, Minitests<br>
-Authentication: Username/Email/Phone number login<br>
-Hosting: Render<br>
+* Frontend: React, Redux Toolkit, CSS<br>
+* Backend: Flask, PostgreSQL<br>
+* Database: PostgreSQL<br>
+* Payment Integration: Safaricom Daraja API<br>
+* Testing: Jest, Minitests<br>
+* Authentication: Username/Email/Phone number login<br>
+* Hosting: Render<br>
 
 `Admin Privileges`
 Admin users have special access to:
