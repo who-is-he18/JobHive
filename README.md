@@ -26,3 +26,11 @@ Admin users have special access to:
   - Moderate profiles<br>
   - Oversee user activities<br>
   - Admin features are accessible via the admin dashboard.<br>
+
+`Contributors`<br>
+We would like to acknowledge and thank all the contributors who have helped make JobHive a success! The following individuals have contributed to the codebase:
+* **Amos Mokua** [https://github.com/amos-netizen]<br>
+* **Christian Kwe** [https://github.com/kwechristian]<br>
+* **Geoffrey Waiganjo** [https://github.com/who-is-he18]<br>
+* **Naomi Nyakaru** [https://github.com/NaomiNyakaru]
+
