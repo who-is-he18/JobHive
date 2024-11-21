@@ -20,7 +20,7 @@ JobHive is a platform designed to connect job seekers with employers, featuring 
 * Authentication: Username/Email/Phone number login<br>
 * Hosting: Render<br>
 
-`Admin Privileges`
+`Admin Privileges`<br>
 Admin users have special access to:
   - Disable or delete user accounts<br>
   - Moderate profiles<br>
