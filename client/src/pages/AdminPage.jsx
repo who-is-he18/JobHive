@@ -123,7 +123,7 @@ const AdminPage = () => {
                     <h3>Employers</h3>
                     {employers.map((employer) => (
                         <div key={employer.user_id} className="employer-card">
-                            <img src={employer.profile_pic} alt={employer.company_name} />
+                            <img src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb2F1sRrmj0rFgZyVmC8yBgXxyccFRJf7LPQ&s" alt={employer.company_name} />
                             <p><strong>Company:</strong> {employer.company_name}</p>
                             <p><strong>Username:</strong> {employer.username}</p>
                             <button onClick={() => handleDeactivateUser(employer, "employer")}>
@@ -139,7 +139,7 @@ const AdminPage = () => {
                     <h3>Jobseekers</h3>
                     {jobseekers.map((jobseeker) => (
                         <div key={jobseeker.user_id} className="jobseeker-card">
-                            <img src={jobseeker.profile_pic} alt={jobseeker.username} />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-HAN6UFnIHXs29W0hyYpQHh-7TOAgxzjbQ&s" alt={jobseeker.username} />
                             <p><strong>Name:</strong> {jobseeker.username}</p>
                             <p><strong>Bio:</strong> {jobseeker.bio}</p>
                             <p><strong>Job Category:</strong> {jobseeker.job_category}</p>
