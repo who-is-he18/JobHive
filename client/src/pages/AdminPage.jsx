@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminPage.css';
@@ -6,6 +7,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 const AdminPage = () => {
     const [employers, setEmployers] = useState([]);
     const [jobseekers, setJobseekers] = useState([]);
+    const [deactivatedUsers, setDeactivatedUsers] = useState([]);
     const [showEmployers, setShowEmployers] = useState(false);
     const [showJobseekers, setShowJobseekers] = useState(false);
     const [statistics, setStatistics] = useState({
@@ -13,32 +15,30 @@ const AdminPage = () => {
         jobseekerCount: 0,
         pendingCount: 0,
     });
+
     const serverURL = import.meta.env.VITE_SERVER_URL;
 
     const fetchData = async () => {
         try {
-            // Get the JWT token from localStorage
             const token = localStorage.getItem('jwt_token');
             if (!token) {
                 console.error("JWT token not found.");
                 return;
             }
 
-            // Fetch Employers
             const employersResponse = await axios.get(`${serverURL}/admin/employers`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
-            const employersData = employersResponse.data.employers || [];
-            setEmployers(employersData);
-
-            // Fetch Jobseekers
             const jobseekersResponse = await axios.get(`${serverURL}/admin/jobseekers`, {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
+
+            const employersData = employersResponse.data.employers || [];
             const jobseekersData = jobseekersResponse.data.jobseekers || [];
+
+            setEmployers(employersData);
             setJobseekers(jobseekersData);
 
-            // Set Statistics
             const pendingCount = jobseekersData.filter(profile => !profile.profile_verified).length;
             setStatistics({
                 employerCount: employersData.length,
@@ -54,6 +54,30 @@ const AdminPage = () => {
         fetchData();
     }, []);
 
+    const handleDeactivateUser = (user, type) => {
+        // Remove user from the respective list
+        if (type === "employer") {
+            setEmployers(employers.filter((e) => e.email !== user.email));
+        } else {
+            setJobseekers(jobseekers.filter((j) => j.email !== user.email));
+        }
+
+        // Add user to the deactivated list
+        setDeactivatedUsers([...deactivatedUsers, { ...user, type }]);
+    };
+
+    const handleActivateUser = (user) => {
+        // Remove user from the deactivated list
+        setDeactivatedUsers(deactivatedUsers.filter((u) => u.email !== user.email));
+
+        // Restore user to the respective list
+        if (user.type === "employer") {
+            setEmployers([...employers, user]);
+        } else {
+            setJobseekers([...jobseekers, user]);
+        }
+    };
+
     const handleViewEmployers = () => {
         setShowEmployers(true);
         setShowJobseekers(false);
@@ -63,35 +87,7 @@ const AdminPage = () => {
         setShowJobseekers(true);
         setShowEmployers(false);
     };
-    
-    const handleDeactivateUser = async (email) => {
-        console.log("Deactivating user with email:", email); // Add this line to check if it's triggered
-        try {
-            const token = localStorage.getItem('jwt_token');
-            if (!token) {
-                console.error("JWT token not found.");
-                return;
-            }
-    
-            if (!email) {
-                console.error("Email is missing");
-                return;
-            }
-    
-            const response = await axios.put(`${serverURL}/admin/deactivate_user/${email}`, {}, {
-                headers: { 'Authorization': `Bearer ${token}` },
-            });
-    
-            console.log('Deactivation response:', response.data); // Log the response
-    
-            // Re-fetch the users after deactivating
-            fetchData();
-        } catch (error) {
-            console.error('Error deactivating user:', error.response?.data || error.message);
-        }
-    };
-    
-    
+
     return (
         <div className="admin-page">
             <header className="admin-header">
@@ -130,7 +126,9 @@ const AdminPage = () => {
                             <img src={employer.profile_pic} alt={employer.company_name} />
                             <p><strong>Company:</strong> {employer.company_name}</p>
                             <p><strong>Username:</strong> {employer.username}</p>
-                            <button onClick={() => handleDeactivateUser(employer.email)}>Deactivate</button>
+                            <button onClick={() => handleDeactivateUser(employer, "employer")}>
+                                Deactivate
+                            </button>
                         </div>
                     ))}
                 </div>
@@ -145,7 +143,21 @@ const AdminPage = () => {
                             <p><strong>Name:</strong> {jobseeker.username}</p>
                             <p><strong>Bio:</strong> {jobseeker.bio}</p>
                             <p><strong>Job Category:</strong> {jobseeker.job_category}</p>
-                            <button onClick={() => handleDeactivateUser(jobseeker.email)}>Deactivate</button>
+                            <button onClick={() => handleDeactivateUser(jobseeker, "jobseeker")}>
+                                Deactivate
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            {deactivatedUsers.length > 0 && (
+                <div className="deactivated-users">
+                    <h3>Deactivated Users</h3>
+                    {deactivatedUsers.map((user) => (
+                        <div key={user.user_id} className="deactivated-user-card">
+                            <p><strong>{user.type === "employer" ? "Company" : "Name"}:</strong> {user.username}</p>
+                            <button onClick={() => handleActivateUser(user)}>Activate</button>
                         </div>
                     ))}
                 </div>
