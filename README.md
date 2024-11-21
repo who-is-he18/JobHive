@@ -11,7 +11,7 @@ JobHive is a platform designed to connect job seekers with employers, featuring 
 6. Profile Verification: Job seekers must have their profiles verified before they can be visible to employers.<br>
 7. Payment Integration: Employers must pay to view profiles and contact job seekers, powered by Safaricom's Daraja API.<br>
 
-`Tech Stack`
+`Tech Stack`<br>
 Frontend: React, Redux Toolkit, CSS<br>
 Backend: Flask, PostgreSQL<br>
 Database: PostgreSQL<br>
