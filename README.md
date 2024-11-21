@@ -33,4 +33,5 @@ We would like to acknowledge and thank all the contributors who have helped make
 * **Christian Kwe** [https://github.com/kwechristian]<br>
 * **Geoffrey Waiganjo** [https://github.com/who-is-he18]<br>
 * **Naomi Nyakaru** [https://github.com/NaomiNyakaru]
+* **Gyzelle Muthoni** [https://github.com/Gyzelle01]
 
