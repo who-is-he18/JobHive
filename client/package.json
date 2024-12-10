@@ -11,6 +11,7 @@
     "start": "react-scripts start"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^1.7.7",
     "formik": "^2.4.6",
     "jwt-decode": "^3.1.2",
