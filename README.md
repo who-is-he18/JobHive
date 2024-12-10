@@ -1,5 +1,8 @@
 JobHive
 =======
+LInk to my deployed project : 
+https://jobhive-frontend.onrender.com
+
 JobHive is a platform designed to connect job seekers with employers, featuring job postings, profiles, and messaging. It allows employers to browse job seekers' profiles, send messages, and interact with verified profiles. The admin has special privileges such as managing user accounts and moderating activities. The project is built using Flask for the backend, React for the frontend, PostgreSQL for the database, and integrates Safaricom's Daraja API for payments.
 
 `Features`
